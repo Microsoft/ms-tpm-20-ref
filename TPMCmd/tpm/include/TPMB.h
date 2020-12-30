@@ -41,7 +41,7 @@
 
 // TPM2B Types
 typedef struct {
-    UINT16          size;  
+    UINT16          size;
     BYTE            buffer[1];
 } TPM2B, *P2B;
 typedef const TPM2B     *PC2B;

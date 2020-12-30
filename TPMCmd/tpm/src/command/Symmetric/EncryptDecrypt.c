@@ -87,7 +87,7 @@ TPM2_EncryptDecrypt(
         OK = OK && IS_ATTRIBUTE(attributes, TPMA_OBJECT, sign);
     if(!OK)
         return TPM_RCS_ATTRIBUTES + RC_EncryptDecrypt_keyHandle;
-    
+
     // If the key mode is not TPM_ALG_NULL...
     // or TPM_ALG_NULL
     if(mode != TPM_ALG_NULL)
@@ -108,7 +108,7 @@ TPM2_EncryptDecrypt(
     keySize = symKey->publicArea.parameters.symDetail.sym.keyBits.sym;
     alg = symKey->publicArea.parameters.symDetail.sym.algorithm;
     blockSize = CryptGetSymmetricBlockSize(alg, keySize);
-    
+
     // reverify the algorithm. This is mainly to keep static analysis tools happy
     if(blockSize == 0)
         return TPM_RCS_KEY + RC_EncryptDecrypt_keyHandle;

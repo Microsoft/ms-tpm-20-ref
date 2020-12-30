@@ -203,9 +203,9 @@ DivideB(
 }
 
 //*** AdjustNumberB()
-// Remove/add leading zeros from a number in a TPM2B. Will try to make the number 
-// by adding or removing leading zeros. If the number is larger than the requested 
-// size, it will make the number as small as possible. Setting 'requestedSize' to 
+// Remove/add leading zeros from a number in a TPM2B. Will try to make the number
+// by adding or removing leading zeros. If the number is larger than the requested
+// size, it will make the number as small as possible. Setting 'requestedSize' to
 // zero is equivalent to requesting that the number be normalized.
 UINT16
 AdjustNumberB(
@@ -233,7 +233,7 @@ AdjustNumberB(
         }
     }
     // This is a request to shift the number to the right (add leading zeros)
-    else 
+    else
     {
         MemoryCopy(&num->buffer[requestedSize - num->size], num->buffer, num->size);
         MemorySet(num->buffer, 0, requestedSize- num->size);
@@ -243,7 +243,7 @@ AdjustNumberB(
 }
 
 //*** ShiftLeft()
-// This function shifts a byte buffer (a TPM2B) one byte to the left. That is, 
+// This function shifts a byte buffer (a TPM2B) one byte to the left. That is,
 // the most significant bit of the most significant byte is lost.
 TPM2B *
 ShiftLeft(
@@ -262,4 +262,3 @@ ShiftLeft(
     }
     return value;
 }
-

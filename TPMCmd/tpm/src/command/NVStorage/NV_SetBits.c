@@ -63,7 +63,7 @@ TPM2_NV_SetBits(
 // Input Validation
 
     // Common access checks, NvWriteAccessCheck() may return TPM_RC_NV_AUTHORIZATION
-    // or TPM_RC_NV_LOCKED 
+    // or TPM_RC_NV_LOCKED
     result = NvWriteAccessChecks(in->authHandle,
                                  in->nvIndex,
                                  nvIndex->publicArea.attributes);
@@ -75,7 +75,7 @@ TPM2_NV_SetBits(
         return TPM_RCS_ATTRIBUTES + RC_NV_SetBits_nvIndex;
 
     // If index is not been written, initialize it
-    if(!IS_ATTRIBUTE(nvIndex->publicArea.attributes, TPMA_NV, WRITTEN))   
+    if(!IS_ATTRIBUTE(nvIndex->publicArea.attributes, TPMA_NV, WRITTEN))
         oldValue = 0;
     else
         // Read index data

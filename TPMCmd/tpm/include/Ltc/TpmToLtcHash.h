@@ -64,17 +64,17 @@
 // The following defines are only needed by CryptHash.c
 #ifdef _CRYPT_HASH_C_
 
-// Define the interface between CryptHash.c to the functions provided by the 
-// library. For each method, define the calling parameters of the method and then 
+// Define the interface between CryptHash.c to the functions provided by the
+// library. For each method, define the calling parameters of the method and then
 // define how the method is invoked in CryptHash.c.
 //
 // All hashes are required to have the same calling sequence. If they don't, create
 // a simple adaptation function that converts from the "standard" form of the call
 // to the form used by the specific hash (and then send a nasty letter to the
-// person who wrote the hash function for the library). 
-// 
+// person who wrote the hash function for the library).
+//
 // The macro that calls the method also defines how the
-// parameters get swizzled between the default form (in CryptHash.c)and the 
+// parameters get swizzled between the default form (in CryptHash.c)and the
 // library form.
 //
 // Initialize the hash context
@@ -112,7 +112,7 @@
                          &(hashStateIn)->state,                                 \
                          (hashStateIn)->def->contextSize)
 
-// Copy (with reformatting when necessary) an internal hash structure to an 
+// Copy (with reformatting when necessary) an internal hash structure to an
 // external blob
 #define  HASH_STATE_EXPORT_METHOD_DEF                                           \
                 void (HASH_STATE_EXPORT_METHOD)(BYTE *to,                       \
@@ -124,7 +124,7 @@
                          &(hashStateFrom)->state,                               \
                          (hashStateFrom)->def->contextSize)
 
-// Copy from an external blob to an internal formate (with reformatting when 
+// Copy from an external blob to an internal formate (with reformatting when
 // necessary
 #define  HASH_STATE_IMPORT_METHOD_DEF                                           \
                 void (HASH_STATE_IMPORT_METHOD)(PANY_HASH_STATE to,             \
@@ -141,26 +141,26 @@
 #define tpmHashStart_SHA1           sha1_init
 #define tpmHashData_SHA1            sha1_process
 #define tpmHashEnd_SHA1             sha1_done
-#define tpmHashStateCopy_SHA1       memcpy 
-#define tpmHashStateExport_SHA1     memcpy 
+#define tpmHashStateCopy_SHA1       memcpy
+#define tpmHashStateExport_SHA1     memcpy
 #define tpmHashStateImport_SHA1     memcpy
 #define tpmHashStart_SHA256         sha256_init
 #define tpmHashData_SHA256          sha256_process
 #define tpmHashEnd_SHA256           sha256_done
-#define tpmHashStateCopy_SHA256     memcpy 
+#define tpmHashStateCopy_SHA256     memcpy
 #define tpmHashStateExport_SHA256   memcpy
-#define tpmHashStateImport_SHA256   memcpy 
+#define tpmHashStateImport_SHA256   memcpy
 #define tpmHashStart_SHA384         sha384_init
 #define tpmHashData_SHA384          sha384_process
 #define tpmHashEnd_SHA384           sha384_done
-#define tpmHashStateCopy_SHA384     memcpy 
-#define tpmHashStateExport_SHA384   memcpy 
-#define tpmHashStateImport_SHA384   memcpy 
+#define tpmHashStateCopy_SHA384     memcpy
+#define tpmHashStateExport_SHA384   memcpy
+#define tpmHashStateImport_SHA384   memcpy
 #define tpmHashStart_SHA512         sha512_init
 #define tpmHashData_SHA512          sha512_process
 #define tpmHashEnd_SHA512           sha512_done
-#define tpmHashStateCopy_SHA512     memcpy 
-#define tpmHashStateExport_SHA512   memcpy 
+#define tpmHashStateCopy_SHA512     memcpy
+#define tpmHashStateExport_SHA512   memcpy
 #define tpmHashStateImport_SHA512   memcpy
 
 #endif // _CRYPT_HASH_C_

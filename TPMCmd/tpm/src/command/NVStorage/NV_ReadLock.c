@@ -74,9 +74,9 @@ TPM2_NV_ReadLock(
 
     // If NvReadAccessChecks return TPM_RC_NV_UNINITALIZED, then continue.
     // It is not an error to read lock an uninitialized Index.
-    
+
     // if TPMA_NV_READ_STCLEAR is not set, the index can not be read-locked
-    if(!IS_ATTRIBUTE(nvAttributes, TPMA_NV, READ_STCLEAR))   
+    if(!IS_ATTRIBUTE(nvAttributes, TPMA_NV, READ_STCLEAR))
         return TPM_RCS_ATTRIBUTES + RC_NV_ReadLock_nvIndex;
 
 // Internal Data Update

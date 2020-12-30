@@ -97,7 +97,7 @@ TPM2_SetPrimaryPolicy(
             go.ACT_##N.authPolicy = in->authPolicy;                                 \
             g_clearOrderly = TRUE;                                                  \
             break;
-			
+
             FOR_EACH_ACT(SET_ACT_POLICY)
 
         default:

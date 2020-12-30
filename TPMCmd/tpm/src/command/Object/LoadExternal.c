@@ -45,7 +45,7 @@
 // both a public and sensitive area
 */
 //  Return Type: TPM_RC
-//      TPM_RC_ATTRIBUTES       'fixedParent', 'fixedTPM', and 'restricted' must 
+//      TPM_RC_ATTRIBUTES       'fixedParent', 'fixedTPM', and 'restricted' must
 //                              be CLEAR if sensitive portion of an object is loaded
 //      TPM_RC_BINDING          the 'inPublic' and 'inPrivate' structures are not
 //                              cryptographically bound
@@ -98,16 +98,16 @@ TPM2_LoadExternal(
             return TPM_RCS_HIERARCHY + RC_LoadExternal_hierarchy;
         // An external object with a sensitive area must have fixedTPM == CLEAR
         // fixedParent == CLEAR so that it does not appear to be a key created by
-        // this TPM. 
-        if(IS_ATTRIBUTE(in->inPublic.publicArea.objectAttributes, TPMA_OBJECT, 
+        // this TPM.
+        if(IS_ATTRIBUTE(in->inPublic.publicArea.objectAttributes, TPMA_OBJECT,
                         fixedTPM)
-           || IS_ATTRIBUTE(in->inPublic.publicArea.objectAttributes, TPMA_OBJECT, 
+           || IS_ATTRIBUTE(in->inPublic.publicArea.objectAttributes, TPMA_OBJECT,
                            fixedParent)
-           || IS_ATTRIBUTE(in->inPublic.publicArea.objectAttributes, TPMA_OBJECT, 
+           || IS_ATTRIBUTE(in->inPublic.publicArea.objectAttributes, TPMA_OBJECT,
                            restricted))
             return TPM_RCS_ATTRIBUTES + RC_LoadExternal_inPublic;
 
-        // Have sensitive point to something other than NULL so that object 
+        // Have sensitive point to something other than NULL so that object
         // initialization will load the sensitive part too
         sensitive = &in->inPrivate.sensitiveArea;
     }
@@ -116,8 +116,8 @@ TPM2_LoadExternal(
     PublicMarshalAndComputeName(&in->inPublic.publicArea, &out->name);
 
     // Load and validate key
-    result = ObjectLoad(object, NULL, 
-                        &in->inPublic.publicArea, sensitive, 
+    result = ObjectLoad(object, NULL,
+                        &in->inPublic.publicArea, sensitive,
                         RC_LoadExternal_inPublic, RC_LoadExternal_inPrivate,
                         &out->name);
     if(result == TPM_RC_SUCCESS)

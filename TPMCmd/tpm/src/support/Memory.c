@@ -160,7 +160,7 @@ MemorySet(
     int              value,
     size_t           size
     )
-{ 
+{
     memset(dest, value, size);
 }
 
@@ -222,7 +222,7 @@ Uint64ToByteArray(
 }
 
 //*** ByteArrayToUint8()
-// Function to write a UINT8 to a byte array. This is included for completeness 
+// Function to write a UINT8 to a byte array. This is included for completeness
 // and to allow certain macro expansions
 UINT8
 ByteArrayToUint8(
@@ -262,8 +262,3 @@ ByteArrayToUint64(
 {
     return (((UINT64)BYTE_ARRAY_TO_UINT32(a)) << 32) + BYTE_ARRAY_TO_UINT32(&a[4]);
 }
-
-
-
-
-

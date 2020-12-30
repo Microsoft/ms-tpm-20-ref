@@ -101,7 +101,7 @@ TPM2_PolicySecret(
                           &entityName, &out->policyTicket);
         // Generate timeout buffer.  The format of output timeout buffer is
         // TPM-specific.
-        // Note: In this implementation, the timeout buffer value is computed after 
+        // Note: In this implementation, the timeout buffer value is computed after
         // the ticket is produced so, when the ticket is checked, the expiration
         // flag needs to be extracted before the ticket is checked.
         out->timeout.t.size = sizeof(authTimeout);

@@ -89,7 +89,7 @@ CryptGetSymmetricBlockSize(
 {
     const INT16    *sizes;
     INT16            i;
-#define ALG_CASE(SYM, sym)  case TPM_ALG_##SYM: sizes = sym##KeyBlockSizes; break 
+#define ALG_CASE(SYM, sym)  case TPM_ALG_##SYM: sizes = sym##KeyBlockSizes; break
     switch(symmetricAlg)
     {
 #define GET_KEY_BLOCK_POINTER(SYM, sym)                                             \
@@ -108,7 +108,7 @@ CryptGetSymmetricBlockSize(
         if(*sizes == keySizeInBits)
             break;
     }
-    // If sizes is pointing at the end of the list of key sizes, then the desired 
+    // If sizes is pointing at the end of the list of key sizes, then the desired
     // key size was not found so set the block size to zero.
     if(*sizes++ < 0)
         return 0;
@@ -471,5 +471,3 @@ CryptSymKeyValidate(
 #endif // ALG_TDES
     return TPM_RC_SUCCESS;
 }
-
-

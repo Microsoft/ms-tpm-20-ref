@@ -102,7 +102,7 @@ GetClosestCommandIndex(
     // The commandCode is a UINT32 and the search index is UINT16. We are going to
     // search for a match but need to make sure that the commandCode value is not
     // out of range. To do this, need to clear the vendor bit of the commandCode
-    // (if set) and compare the result to the 16-bit searchIndex value. If it is 
+    // (if set) and compare the result to the 16-bit searchIndex value. If it is
     // out of range, indicate that the command is not implemented
     if((commandCode & ~CC_VEND) != searchIndex)
         return UNIMPLEMENTED_COMMAND_INDEX;
@@ -124,7 +124,7 @@ GetClosestCommandIndex(
         // entry.
         // Note: Put this check first so that the typical case of only one vendor-
         // specific command doesn't waste any more time.
-        if(GET_ATTRIBUTE(s_ccAttr[LIBRARY_COMMAND_ARRAY_SIZE], TPMA_CC, 
+        if(GET_ATTRIBUTE(s_ccAttr[LIBRARY_COMMAND_ARRAY_SIZE], TPMA_CC,
                          commandIndex) >= searchIndex)
         {
             // the vendor array is always assumed to be packed so there is
@@ -132,7 +132,7 @@ GetClosestCommandIndex(
             return LIBRARY_COMMAND_ARRAY_SIZE;
         }
         // See if this is out of range on the top
-        if(GET_ATTRIBUTE(s_ccAttr[COMMAND_COUNT - 1], TPMA_CC, commandIndex) 
+        if(GET_ATTRIBUTE(s_ccAttr[COMMAND_COUNT - 1], TPMA_CC, commandIndex)
            < searchIndex)
         {
             return UNIMPLEMENTED_COMMAND_INDEX;
@@ -174,7 +174,7 @@ GetClosestCommandIndex(
     }
     // Get here if the V-Bit was not set in 'commandCode'
 
-    if(GET_ATTRIBUTE(s_ccAttr[LIBRARY_COMMAND_ARRAY_SIZE - 1], TPMA_CC, 
+    if(GET_ATTRIBUTE(s_ccAttr[LIBRARY_COMMAND_ARRAY_SIZE - 1], TPMA_CC,
                      commandIndex) < searchIndex)
     {
         // requested index is out of the range to the top
@@ -216,7 +216,7 @@ GetClosestCommandIndex(
         while(min <= max)
         {
             commandIndex = (min + max + 1) / 2;
-            diff = GET_ATTRIBUTE(s_ccAttr[commandIndex], TPMA_CC, 
+            diff = GET_ATTRIBUTE(s_ccAttr[commandIndex], TPMA_CC,
                                  commandIndex) - searchIndex;
             if(diff == 0)
                 return commandIndex;
@@ -283,7 +283,7 @@ CommandCodeToCommandIndex(
     // requested, then the command is not implemented.
     if(commandIndex != UNIMPLEMENTED_COMMAND_INDEX)
     {
-        if((GET_ATTRIBUTE(s_ccAttr[commandIndex], TPMA_CC, commandIndex) 
+        if((GET_ATTRIBUTE(s_ccAttr[commandIndex], TPMA_CC, commandIndex)
             != searchIndex)
            || (IS_ATTRIBUTE(s_ccAttr[commandIndex], TPMA_CC, V)) != vendor)
             commandIndex = UNIMPLEMENTED_COMMAND_INDEX;
@@ -372,7 +372,7 @@ EncryptSize(
     COMMAND_INDEX    commandIndex   // IN: command index
     )
 {
-    return ((s_commandAttributes[commandIndex] & ENCRYPT_2) ? 2 : 
+    return ((s_commandAttributes[commandIndex] & ENCRYPT_2) ? 2 :
             (s_commandAttributes[commandIndex] & ENCRYPT_4) ? 4 : 0);
 }
 
@@ -388,7 +388,7 @@ DecryptSize(
     COMMAND_INDEX    commandIndex   // IN: command index
     )
 {
-    return ((s_commandAttributes[commandIndex] & DECRYPT_2) ? 2 : 
+    return ((s_commandAttributes[commandIndex] & DECRYPT_2) ? 2 :
             (s_commandAttributes[commandIndex] & DECRYPT_4) ? 4 : 0);
 }
 

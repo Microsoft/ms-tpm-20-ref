@@ -37,7 +37,7 @@
 #include "AC_spt_fp.h"
 
 
-#if 1 // This is the simulated AC data. 
+#if 1 // This is the simulated AC data.
 
 typedef struct {
     TPMI_RH_AC               ac;
@@ -46,7 +46,7 @@ typedef struct {
 } acCapabilities;
 
 
-TPML_AC_CAPABILITIES acData0001 = {1, 
+TPML_AC_CAPABILITIES acData0001 = {1,
         {{TPM_AT_PV1, 0x01234567}}};
 
 acCapabilities  ac[1] = { {0x0001, &acData0001} };
@@ -92,7 +92,7 @@ AcIsAccessible(
 //      NO          all the available handles has been returned
 TPMI_YES_NO
 AcCapabilitiesGet(
-    TPMI_RH_AC               component,     // IN: the component 
+    TPMI_RH_AC               component,     // IN: the component
     TPM_AT                   type,          // IN: start capability type
     TPML_AC_CAPABILITIES    *capabilityList // OUT: list of handle
 )
@@ -135,13 +135,13 @@ AcCapabilitiesGet(
 TPM_RC
 AcSendObject(
     TPM_HANDLE           acHandle,      // IN: Handle of AC receiving object
-    OBJECT              *object,        // IN: object structure to send 
+    OBJECT              *object,        // IN: object structure to send
     TPMS_AC_OUTPUT      *acDataOut      // OUT: results of operation
 )
 {
     NOT_REFERENCED(object);
     NOT_REFERENCED(acHandle);
-    acDataOut->tag = TPM_AT_ERROR;  // indicate that the response contains an 
+    acDataOut->tag = TPM_AT_ERROR;  // indicate that the response contains an
                                     // error code
     acDataOut->data = TPM_AE_NONE;  // but there is no error.
 

@@ -49,7 +49,7 @@
 //      TPM_RC_KEY              for an ECC key, the public key is not on the curve
 //                              of the curve ID
 //      TPM_RC_KEY_SIZE         the decrypted input symmetric key size
-//                              does not match the symmetric algorithm 
+//                              does not match the symmetric algorithm
 //                              key size of 'oldParent'
 //      TPM_RC_TYPE             'oldParent' is not a storage key, or 'newParent'
 //                              is not a storage key
@@ -84,7 +84,7 @@ TPM2_Rewrap(
         // Decrypt input secret data via asymmetric decryption.  A
         // TPM_RC_VALUE, TPM_RC_KEY or unmarshal errors may be returned at this
         // point
-        result = CryptSecretDecrypt(oldParent, NULL, DUPLICATE_STRING, 
+        result = CryptSecretDecrypt(oldParent, NULL, DUPLICATE_STRING,
                                     &in->inSymSeed, &data);
         if(result != TPM_RC_SUCCESS)
             return TPM_RCS_VALUE + RC_Rewrap_inSymSeed;
@@ -120,7 +120,7 @@ TPM2_Rewrap(
         // TPM_RC_VALUE error may be returned at this point if RSA algorithm is
         // enabled in TPM
         out->outSymSeed.t.size = sizeof(out->outSymSeed.t.secret);
-        result = CryptSecretEncrypt(newParent, DUPLICATE_STRING, &data, 
+        result = CryptSecretEncrypt(newParent, DUPLICATE_STRING, &data,
                                     &out->outSymSeed);
         if(result != TPM_RC_SUCCESS)
             return result;
@@ -135,9 +135,9 @@ TPM2_Rewrap(
             return TPM_RCS_VALUE + RC_Rewrap_inDuplicate;
 // Command output
         out->outDuplicate.t.size = privateBlob.t.size;
-        pAssert(privateBlob.t.size 
+        pAssert(privateBlob.t.size
                 <= sizeof(out->outDuplicate.t.buffer) - hashSize);
-        MemoryCopy(out->outDuplicate.t.buffer + hashSize, privateBlob.t.buffer, 
+        MemoryCopy(out->outDuplicate.t.buffer + hashSize, privateBlob.t.buffer,
                    privateBlob.t.size);
         // Produce outer wrapper for output
         out->outDuplicate.t.size = ProduceOuterWrap(newParent, &in->name.b,

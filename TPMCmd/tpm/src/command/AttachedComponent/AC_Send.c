@@ -73,8 +73,8 @@ TPM2_AC_Send(
     // If there is an NV alias, then the index must allow the authorization provided
     if(nvIndex != NULL)
     {
-        // Common access checks, NvWriteAccessCheck() may return 
-        // TPM_RC_NV_AUTHORIZATION or TPM_RC_NV_LOCKED 
+        // Common access checks, NvWriteAccessCheck() may return
+        // TPM_RC_NV_AUTHORIZATION or TPM_RC_NV_LOCKED
         result = NvWriteAccessChecks(in->authHandle, nvAlias,
                                      nvIndex->publicArea.attributes);
         if(result != TPM_RC_SUCCESS)
@@ -88,9 +88,9 @@ TPM2_AC_Send(
     else if(HandleGetType(in->authHandle) != TPM_HT_PERMANENT)
         return TPM_RCS_HANDLE + RC_AC_Send_authHandle;
     // Make sure that the object to be duplicated has the right attributes
-    if(IS_ATTRIBUTE(object->publicArea.objectAttributes, 
+    if(IS_ATTRIBUTE(object->publicArea.objectAttributes,
                     TPMA_OBJECT, encryptedDuplication)
-       || IS_ATTRIBUTE(object->publicArea.objectAttributes, TPMA_OBJECT, 
+       || IS_ATTRIBUTE(object->publicArea.objectAttributes, TPMA_OBJECT,
                        fixedParent)
        || IS_ATTRIBUTE(object->publicArea.objectAttributes, TPMA_OBJECT, fixedTPM))
         return TPM_RCS_ATTRIBUTES + RC_AC_Send_sendObject;

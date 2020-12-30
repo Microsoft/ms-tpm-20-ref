@@ -57,12 +57,12 @@ TPM2_EncryptDecrypt2(
     )
 {
     TPM_RC                result;
-    // EncryptDecyrptShared() performs the operations as shown in 
-    // TPM2_EncrypDecrypt 
+    // EncryptDecyrptShared() performs the operations as shown in
+    // TPM2_EncrypDecrypt
     result = EncryptDecryptShared(in->keyHandle, in->decrypt, in->mode,
                                   &in->ivIn, &in->inData,
                                   (EncryptDecrypt_Out *)out);
-    // Handle response code swizzle. 
+    // Handle response code swizzle.
     switch(result)
     {
         case TPM_RCS_MODE + RC_EncryptDecrypt_mode:

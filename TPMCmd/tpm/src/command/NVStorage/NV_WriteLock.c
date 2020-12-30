@@ -62,7 +62,7 @@ TPM2_NV_WriteLock(
 // Input Validation:
 
     // Common access checks, NvWriteAccessCheck() may return TPM_RC_NV_AUTHORIZATION
-    // or TPM_RC_NV_LOCKED 
+    // or TPM_RC_NV_LOCKED
     result = NvWriteAccessChecks(in->authHandle, in->nvIndex, nvAttributes);
     if(result != TPM_RC_SUCCESS)
     {
@@ -74,8 +74,8 @@ TPM2_NV_WriteLock(
     }
     // if neither TPMA_NV_WRITEDEFINE nor TPMA_NV_WRITE_STCLEAR is set, the index
     // can not be write-locked
-    if(!IS_ATTRIBUTE(nvAttributes, TPMA_NV, WRITEDEFINE)   
-       && !IS_ATTRIBUTE(nvAttributes, TPMA_NV, WRITE_STCLEAR))   
+    if(!IS_ATTRIBUTE(nvAttributes, TPMA_NV, WRITEDEFINE)
+       && !IS_ATTRIBUTE(nvAttributes, TPMA_NV, WRITE_STCLEAR))
         return TPM_RCS_ATTRIBUTES + RC_NV_WriteLock_nvIndex;
 // Internal Data Update
     // Set the WRITELOCK attribute.

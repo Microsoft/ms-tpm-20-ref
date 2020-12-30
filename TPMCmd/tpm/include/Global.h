@@ -1301,7 +1301,7 @@ EXTERN OBJECT           s_objects[MAX_LOADED_OBJECTS];
 //*** From PCR.c
 //*****************************************************************************
 #if defined PCR_C || defined GLOBAL_C
-// The following macro is used to define the per-implemented-hash space. This 
+// The following macro is used to define the per-implemented-hash space. This
 // implementation reserves space for all implemented hashes.
 #define PCR_ALL_HASH(HASH, Hash)    BYTE    Hash##Pcr[HASH##_DIGEST_SIZE];
 

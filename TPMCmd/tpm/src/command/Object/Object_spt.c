@@ -390,7 +390,7 @@ CreateChecks(
                 result = TPM_RC_ATTRIBUTES;
             // comment out the next line in order to prevent a fixedTPM derivation
             // parent
-//            break;  
+//            break;
         case TPM_ALG_SYMCIPHER:
             // A restricted key symmetric key (SYMCIPHER and KEYEDHASH)
             // must have sensitiveDataOrigin SET unless it has fixedParent and

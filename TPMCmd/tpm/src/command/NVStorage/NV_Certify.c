@@ -75,7 +75,7 @@ TPM2_NV_Certify(
         return TPM_RCS_SCHEME + RC_NV_Certify_inScheme;
 
     // Common access checks, NvWriteAccessCheck() may return TPM_RC_NV_AUTHORIZATION
-    // or TPM_RC_NV_LOCKED 
+    // or TPM_RC_NV_LOCKED
     result = NvReadAccessChecks(in->authHandle, in->nvIndex,
                                 nvIndex->publicArea.attributes);
     if(result != TPM_RC_SUCCESS)
@@ -126,7 +126,7 @@ TPM2_NV_Certify(
         certifyInfo.type = TPM_ST_ATTEST_NV_DIGEST;
         // Initialize the hash before calling the function to add the Index data to
         // the hash.
-        certifyInfo.attested.nvDigest.nvDigest.t.size = 
+        certifyInfo.attested.nvDigest.nvDigest.t.size =
             CryptHashStart(&hashState, in->inScheme.details.any.hashAlg);
         NvHashIndexData(&hashState, nvIndex, locator, 0,
             nvIndex->publicArea.dataSize);

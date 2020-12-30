@@ -136,7 +136,7 @@ typedef struct SMAC_STATE {
         IF_IMPLEMENTED_SM3_256(op)  \
         IF_IMPLEMENTED_SHA3_256(op) \
         IF_IMPLEMENTED_SHA3_384(op) \
-        IF_IMPLEMENTED_SHA3_512(op) 
+        IF_IMPLEMENTED_SHA3_512(op)
 
 
 #define HASH_TYPE(HASH, Hash)   tpmHashState##HASH##_t  Hash;
@@ -234,7 +234,7 @@ FOR_EACH_HASH(HASH_TPM2B)
 // When the TPM implements ECC, the hash-dependent OID pointers are part of the
 // HASH_DEF. These macros conditionally add the OID reference to the HASH_DEF and the
 // HASH_DEF_TEMPLATE.
-#if ALG_ECDSA 
+#if ALG_ECDSA
 #define ECDSA_HASH_REF    const BYTE  *ECDSA;
 #define ECDSA_OID(NAME)  , OID_ECDSA_##NAME
 #else
@@ -294,7 +294,7 @@ typedef BYTE    HASH_STATE_TYPE;
 // structure before it is used and copy the result back. This just makes things
 // slower.
 // NOTE: This version of the state had the pointer to the update method in the
-// state. This is to allow the SMAC functions to use the same structure without 
+// state. This is to allow the SMAC functions to use the same structure without
 // having to replicate the entire HASH_DEF structure.
 typedef struct _HASH_STATE
 {

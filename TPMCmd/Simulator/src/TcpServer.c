@@ -108,7 +108,7 @@ CreateSocket(
 {
     struct               sockaddr_in MyAddress;
     int res;
-//  
+//
     // Initialize Winsock
 #ifdef _MSC_VER
     WSADATA              wsaData;
@@ -230,7 +230,7 @@ PlatformServer(
                 break;
             }
             default:
-                printf("Unrecognized platform interface command %d\n", 
+                printf("Unrecognized platform interface command %d\n",
                        (int)Command);
                 WriteUINT32(s, 1);
                 return true;
@@ -317,7 +317,7 @@ PlatformSignalService(
     int                  ret;
     int                  port = PortNumber;
 
-    ret = pthread_create(&thread_id, NULL, (void*)PlatformSvcRoutine, 
+    ret = pthread_create(&thread_id, NULL, (void*)PlatformSvcRoutine,
                          (LPVOID)(INT_PTR)port);
     if (ret == -1)
     {
@@ -387,7 +387,7 @@ SimulatorTimeServiceRoutine(
     const int64_t   tick = 1000;
     uint64_t        prevTime = _plat__RealTime();
     int64_t         timeout = tick;
-    
+
     (void)notUsed;
 
     while (true)
@@ -407,7 +407,7 @@ SimulatorTimeServiceRoutine(
         // or no ticks at all, it Sleep() was interrupted prematurely.
         while (prevTime < curTime - tick / 2)
         {
-            //printf("%05lld | %05lld\n", 
+            //printf("%05lld | %05lld\n",
             //      prevTime % 100000, (curTime - tick / 2) % 100000);
             _plat__ACT_Tick();
             prevTime += (uint64_t)tick;
@@ -415,7 +415,7 @@ SimulatorTimeServiceRoutine(
         // Adjust the next timeout to keep the average interval of one second
         timeout = tick + (prevTime - curTime);
         //prevTime = curTime;
-        //printf("%04lld | c:%05lld | p:%05llu\n", 
+        //printf("%04lld | c:%05lld | p:%05llu\n",
         //          timeout, curTime % 100000, prevTime);
     }
     return 0;
@@ -469,7 +469,7 @@ ActTimeService(
 #endif // RH_ACT_0
 
 //*** StartTcpServer()
-// This is the main entry-point to the TCP server.  The server listens on port 
+// This is the main entry-point to the TCP server.  The server listens on port
 // specified.
 //
 // Note that there is no way to specify the network interface in this implementation.
@@ -643,10 +643,10 @@ WriteVarBytes(
     bool res;
 //
     res = WriteBytes(s, (char*)&netLength, 4);
-    if(!res) 
+    if(!res)
         return res;
     res = WriteBytes(s, buffer, BytesToSend);
-    if(!res) 
+    if(!res)
         return res;
     return true;
 }
@@ -737,7 +737,7 @@ TpmServer(
                     return true;
                 }
                 OK &= WriteUINT32(s, ServerVersion);
-                OK &= WriteUINT32(s, tpmInRawMode 
+                OK &= WriteUINT32(s, tpmInRawMode
                                   | tpmPlatformAvailable | tpmSupportsPP);
                 break;
             case TPM_SET_ALTERNATIVE_RESULT:

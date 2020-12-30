@@ -104,15 +104,15 @@ _plat__GetEntropy(
 //
     if(amount == 0)
     {
-        // Seed the platform entropy source if the entropy source is software. There 
-        // is no reason to put a guard macro (#if or #ifdef) around this code because 
-        // this code would not be here if someone was changing it for a system with 
+        // Seed the platform entropy source if the entropy source is software. There
+        // is no reason to put a guard macro (#if or #ifdef) around this code because
+        // this code would not be here if someone was changing it for a system with
         // actual hardware.
         //
-        // NOTE 1: The following command does not provide proper cryptographic 
-        // entropy. Its primary purpose to make sure that different instances of the 
-        // simulator, possibly started by a script on the same machine, are seeded 
-        // differently. Vendors of the actual TPMs need to ensure availability of 
+        // NOTE 1: The following command does not provide proper cryptographic
+        // entropy. Its primary purpose to make sure that different instances of the
+        // simulator, possibly started by a script on the same machine, are seeded
+        // differently. Vendors of the actual TPMs need to ensure availability of
         // proper entropy using their platform-specific means.
         //
         // NOTE 2: In debug builds by default the reference implementation will seed
@@ -136,9 +136,9 @@ _plat__GetEntropy(
         else
         {
             lastEntropy = rndNum;
-            // Each process will have its random number generator initialized 
-            // according to the process id and the initialization time. This is not a 
-            // lot of entropy so, to add a bit more, XOR the current time value into 
+            // Each process will have its random number generator initialized
+            // according to the process id and the initialization time. This is not a
+            // lot of entropy so, to add a bit more, XOR the current time value into
             // the returned entropy value.
             // NOTE: the reason for including the time here rather than have it in
             // in the value assigned to lastEntropy is that rand() could be broken and

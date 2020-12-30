@@ -65,7 +65,7 @@ TPM2_NV_Extend(
 // Input Validation
 
     // Common access checks, NvWriteAccessCheck() may return TPM_RC_NV_AUTHORIZATION
-    // or TPM_RC_NV_LOCKED 
+    // or TPM_RC_NV_LOCKED
     result = NvWriteAccessChecks(in->authHandle,
                                  in->nvIndex,
                                  nvIndex->publicArea.attributes);
@@ -81,7 +81,7 @@ TPM2_NV_Extend(
     // Perform the write.
     oldDigest.t.size = CryptHashGetDigestSize(nvIndex->publicArea.nameAlg);
     pAssert(oldDigest.t.size <= sizeof(oldDigest.t.buffer));
-    if(IS_ATTRIBUTE(nvIndex->publicArea.attributes, TPMA_NV, WRITTEN))   
+    if(IS_ATTRIBUTE(nvIndex->publicArea.attributes, TPMA_NV, WRITTEN))
     {
         NvGetIndexData(nvIndex, locator, 0, oldDigest.t.size, oldDigest.t.buffer);
     }

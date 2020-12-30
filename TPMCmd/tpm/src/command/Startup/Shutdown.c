@@ -64,7 +64,7 @@ TPM2_Shutdown(
     // CLEAR g_daUsed so that any future DA-protected access will cause the
     // shutdown to become non-orderly. It is not sufficient to invalidate the
     // shutdown state after a DA failure because an attacker can inhibit access
-    // to NV and use the fact that an update of ‘failedTries’ was attempted as an
+    // to NV and use the fact that an update of 'failedTries' was attempted as an
     // indication of an authorization failure. By making sure that the orderly state
     // is CLEAR before any DA attempt, this prevents the possibility of this 'attack.'
     g_daUsed = FALSE;

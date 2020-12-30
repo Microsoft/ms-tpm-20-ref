@@ -292,7 +292,7 @@ SessionIsSaved(
 }
 
 //*** SequenceNumberForSavedContextIsValid()
-// This function validates that the sequence number and handle value within a 
+// This function validates that the sequence number and handle value within a
 // saved context are valid.
 BOOL
 SequenceNumberForSavedContextIsValid(
@@ -381,7 +381,7 @@ SessionGet(
 //  to see if the current gap would prevent a context from being saved.  If
 //  so it will return TPM_RC_CONTEXT_GAP.  Otherwise, it will try to find
 //  an open slot in contextArray, set contextArray to the slot.
-//  
+//
 //  This routine requires that the caller has determined the session array
 //  index for the session.
 //
@@ -441,7 +441,7 @@ ContextIdSessionCreate(
 //  the session management may differ in implementations.  This implementation
 //  uses a fixed memory allocation to hold sessions and a fixed allocation
 //  to hold the contextID for the saved contexts.
-//  
+//
 //  Return Type: TPM_RC
 //      TPM_RC_CONTEXT_GAP          need to recycle sessions
 //      TPM_RC_SESSION_HANDLE       active session space is full
@@ -517,16 +517,16 @@ SessionCreate(
 
         SessionSetStartTime(session);
 
-        // Initialize policyDigest.  policyDigest is initialized with a string of 0 
+        // Initialize policyDigest.  policyDigest is initialized with a string of 0
         // of session algorithm digest size. Since the session is already clear.
         // Just need to set the size
-        session->u2.policyDigest.t.size = 
+        session->u2.policyDigest.t.size =
             CryptHashGetDigestSize(session->authHashAlg);
     }
     // Create initial session nonce
     session->nonceTPM.t.size = nonceCaller->t.size;
     CryptRandomGenerate(session->nonceTPM.t.size, session->nonceTPM.t.buffer);
-    MemoryCopy2B(&nonceTpm->b, &session->nonceTPM.b, 
+    MemoryCopy2B(&nonceTpm->b, &session->nonceTPM.b,
                  sizeof(nonceTpm->t.buffer));
 
     // Set up session parameter encryption algorithm
@@ -555,7 +555,7 @@ SessionCreate(
 
         // Compute the session key
         CryptKDFa(session->authHashAlg, &key.b, SESSION_KEY, &session->nonceTPM.b,
-                  &nonceCaller->b, 
+                  &nonceCaller->b,
                   session->sessionKey.t.size * 8, session->sessionKey.t.buffer,
                   NULL, FALSE);
     }
@@ -819,7 +819,7 @@ SessionComputeBoundEntity(
 
 
 //*** SessionSetStartTime()
-// This function is used to initialize the session timing 
+// This function is used to initialize the session timing
 void
 SessionSetStartTime(
     SESSION         *session        // IN: the session to update

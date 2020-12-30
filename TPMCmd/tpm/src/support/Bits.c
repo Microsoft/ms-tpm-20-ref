@@ -89,4 +89,3 @@ ClearBit(
     pAssert(bytesInArray > (bitNum >> 3));
     bArray[bitNum >> 3] &= ~(1 << (bitNum & 7));
 }
-

@@ -62,10 +62,10 @@ typedef struct simpleStructureEntry_t {
     marshalIndex_t  index;              // the index into the appropriate array of
                                         //  the descriptor of this type
     UINT16          offset;             // where this comes from or is placed
-} simpleStructureEntry_t;  
-   
-typedef const struct UintMarshal_mst   
-{  
+} simpleStructureEntry_t;
+
+typedef const struct UintMarshal_mst
+{
     UINT8           marshalType;        // UINT_MTYPE
     UINT8           modifiers;          // size and signed indicator.
 } UintMarshal_mst;
@@ -106,7 +106,7 @@ typedef const struct StructMarshal_mst
     UINT16          values[1];          // three times elements
 } StructMarshal_mst;
 
-typedef const struct ValuesMarshal_mst                    
+typedef const struct ValuesMarshal_mst
 {
     UINT8           marshalType;        // VALUES_MTYPE
     UINT8           modifiers;
@@ -116,7 +116,7 @@ typedef const struct ValuesMarshal_mst
     UINT32          values[1];
 } ValuesMarshal_mst;
 
-typedef const struct TableMarshal_mst                    
+typedef const struct TableMarshal_mst
 {
     UINT8           marshalType;        // TABLE_MTYPE
     UINT8           modifiers;
@@ -128,9 +128,9 @@ typedef const struct TableMarshal_mst
 typedef const struct MinMaxMarshal_mst
 {
     UINT8           marshalType;        // MIN_MAX_MTYPE
-    UINT8           modifiers; 
-    UINT8           errorCode; 
-    UINT32          values[2]; 
+    UINT8           modifiers;
+    UINT8           errorCode;
+    UINT32          values[2];
 } MinMaxMarshal_mst;
 
 typedef const struct Tpm2bMarshal_mst

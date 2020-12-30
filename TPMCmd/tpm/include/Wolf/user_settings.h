@@ -73,7 +73,7 @@
     #define HAVE_ECC
 
     /* Expose additional ECC primitives */
-    #define WOLFSSL_PUBLIC_ECC_ADD_DBL 
+    #define WOLFSSL_PUBLIC_ECC_ADD_DBL
     #define ECC_TIMING_RESISTANT
 
     /* Enables Shamir calc method */

@@ -68,7 +68,7 @@
 #include  <stdio.h>
 #include "RsaKeyCache_fp.h"
 
-#if CRT_FORMAT_RSA == YES 
+#if CRT_FORMAT_RSA == YES
 #define CACHE_FILE_NAME "RsaKeyCacheCrt.data"
 #else
 #define CACHE_FILE_NAME "RsaKeyCacheNoCrt.data"

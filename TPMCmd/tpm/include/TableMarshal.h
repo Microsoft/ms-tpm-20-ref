@@ -38,7 +38,7 @@
 
 // These are the basic unmarshaling types. This is in the first byte of
 // each structure descriptor that is passed to Marshal()/Unmarshal() for processing.
-#define UINT_MTYPE          0                          
+#define UINT_MTYPE          0
 #define VALUES_MTYPE        (UINT_MTYPE + 1)
 #define TABLE_MTYPE         (VALUES_MTYPE + 1)
 #define MIN_MAX_MTYPE       (TABLE_MTYPE + 1)
@@ -49,16 +49,16 @@
 #define LIST_MTYPE          (TPM2BS_MTYPE + 1) // TPML
 #define ERROR_MTYPE         (LIST_MTYPE + 1)
 #define NULL_MTYPE          (ERROR_MTYPE + 1)
-#define COMPOSITE_MTYPE     (NULL_MTYPE + 1)   
+#define COMPOSITE_MTYPE     (NULL_MTYPE + 1)
 
-//*** The Marshal Index 
+//*** The Marshal Index
 // A structure is used to hold the values that guide the marshaling/unmarshaling of
-// each of the types. Each structure has a name and an address. For a structure to 
+// each of the types. Each structure has a name and an address. For a structure to
 // define a TPMS_name, the structure is a TPMS_name_MARSHAL_STRUCT and its
-// index is TPMS_name_MARSHAL_INDEX. So, to get the proper structure, use the 
+// index is TPMS_name_MARSHAL_INDEX. So, to get the proper structure, use the
 // associated marshal index. The marshal index is passed to Marshal() or Unmarshal()
 // and those functions look up the proper structure.
-// 
+//
 // To handle structures that allow a null value, the upper bit of each marshal
 // index indicates if the null value is allowed. This is the NULL_FLAG. It is defined
 // in TableMarshalIndex.h because it is needed by code outside of the marshaling
@@ -162,7 +162,7 @@ typedef struct listModifier {
 #define PROPAGATE_NULL      (TAKES_NULL)
 
 // Can be used in min-max or table structures.
-#define HAS_BITS            (1 << 6)    // when bit mask is present 
+#define HAS_BITS            (1 << 6)    // when bit mask is present
 
 // In a union, we need to know if this is a union of constant arrays.
 #define IS_ARRAY_UNION      (1 << 6)
@@ -180,7 +180,7 @@ typedef struct listModifier {
 // not that long. As of now, only 10-bits of the descriptor word leaving room for
 // expansion.
 
-// These are the values used in a STRUCTURE_MTYPE to identify the sub-type of the 
+// These are the values used in a STRUCTURE_MTYPE to identify the sub-type of the
 // thing being processed
 #define SIMPLE_STYPE                0
 #define UNION_STYPE                 1
@@ -216,9 +216,9 @@ typedef struct listModifier {
 // the (val - min) value to index the bit. This would be used when verifying that
 // a particular algorithm is implemented. In other cases, there is a bit for each
 // value in a table. For example, if checking the key sizes, there is a list of
-// possible key sizes allowed by the algorithm registry and a bit field to indicate 
-// if that key size is allowed in the implementation. The smallest bit field has 
-// 32-bits because it is implemented as part of the 'values' array in structures 
+// possible key sizes allowed by the algorithm registry and a bit field to indicate
+// if that key size is allowed in the implementation. The smallest bit field has
+// 32-bits because it is implemented as part of the 'values' array in structures
 // that allow bit fields.
 #define IS_BIT_SET32(bit, bits)                                                     \
                         ((((UINT32 *)bits)[bit >> 5] & (1 << (bit & 0x1F))) != 0)

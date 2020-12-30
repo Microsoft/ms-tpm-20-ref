@@ -165,7 +165,7 @@ HandleToObject(
     // Return NULL if the handle references a permanent handle because there is no
     // associated OBJECT.
     if(HandleGetType(handle) == TPM_HT_PERMANENT)
-        return NULL; 
+        return NULL;
     // In this implementation, the handle is determined by the slot occupied by the
     // object.
     index = handle - TRANSIENT_FIRST;
@@ -314,7 +314,7 @@ ObjectSetLoadedAttributes(
 //
     // Copy the stClear attribute from the public area. This could be overwritten
     // if the parent has stClear SET
-    object->attributes.stClear = 
+    object->attributes.stClear =
         IS_ATTRIBUTE(objectAttributes, TPMA_OBJECT, stClear);
     // If parent handle is a permanent handle, it is a primary (unless it is NULL
     if(parent == NULL)
@@ -349,7 +349,7 @@ ObjectSetLoadedAttributes(
         object->attributes.ppsHierarchy = parent->attributes.ppsHierarchy;
         // An object is temporary if its parent is temporary or if the object
         // is external
-        object->attributes.temporary = parent->attributes.temporary 
+        object->attributes.temporary = parent->attributes.temporary
             || object->attributes.external;
     }
     // If this is an external object, set the QN == name but don't SET other
@@ -383,7 +383,7 @@ ObjectSetLoadedAttributes(
 // Common function to load an object. A loaded object has its public area validated
 // (unless its 'nameAlg' is TPM_ALG_NULL). If a sensitive part is loaded, it is
 // verified to be correct and if both public and sensitive parts are loaded, then
-// the cryptographic binding between the objects is validated. This function does 
+// the cryptographic binding between the objects is validated. This function does
 // not cause the allocated slot to be marked as in use.
 TPM_RC
 ObjectLoad(
@@ -391,7 +391,7 @@ ObjectLoad(
                                     //     object
     OBJECT          *parent,        // IN: (optional) the parent object
     TPMT_PUBLIC     *publicArea,    // IN: public area to be installed in the object
-    TPMT_SENSITIVE  *sensitive,     // IN: (optional) sensitive area to be 
+    TPMT_SENSITIVE  *sensitive,     // IN: (optional) sensitive area to be
                                     //      installed in the object
     TPM_RC           blamePublic,   // IN: parameter number to associate with the
                                     //     publicArea errors
@@ -439,7 +439,7 @@ ObjectLoad(
             return result;
     }
 #if ALG_RSA
-    // If this is an RSA key, then expand the private exponent. 
+    // If this is an RSA key, then expand the private exponent.
     // Note: ObjectLoad() is only called by TPM2_Import() if the parent is fixedTPM.
     // For any key that does not have a fixedTPM parent, the exponent is computed
     // whenever it is loaded
@@ -545,8 +545,8 @@ ObjectCreateHMACSequence(
                    keyObject->sensitive.sensitive.bits.b.size,
                    keyObject->sensitive.sensitive.bits.b.buffer) == 0)
 #else
-    if(CryptMacStart(&hmacObject->state.hmacState, 
-                     &keyObject->publicArea.parameters, 
+    if(CryptMacStart(&hmacObject->state.hmacState,
+                     &keyObject->publicArea.parameters,
                      hashAlg, &keyObject->sensitive.sensitive.any.b) == 0)
 #endif // SMAC_IMPLEMENTED
         return TPM_RC_FAILURE;
@@ -795,8 +795,8 @@ ObjectComputeName(
     )
 {
     // Hash the publicArea into the name buffer leaving room for the nameAlg
-    name->t.size = CryptHashBlock(nameAlg, size, publicArea, 
-                                  sizeof(name->t.name) - 2, 
+    name->t.size = CryptHashBlock(nameAlg, size, publicArea,
+                                  sizeof(name->t.name) - 2,
                                   &name->t.name[2]);
     // set the nameAlg
     UINT16_TO_BYTE_ARRAY(nameAlg, name->t.name);
@@ -876,7 +876,7 @@ ComputeQualifiedName(
 
 //*** ObjectIsStorage()
 // This function determines if an object has the attributes associated
-// with a parent. A parent is an asymmetric or symmetric block cipher key 
+// with a parent. A parent is an asymmetric or symmetric block cipher key
 // that has its 'restricted' and 'decrypt' attributes SET, and 'sign' CLEAR.
 //  Return Type: BOOL
 //      TRUE(1)         object is a storage key

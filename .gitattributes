@@ -1,0 +1,30 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Explicitly mark source and documentation files as text.
+*.c        text
+*.h        text
+*.s        text
+*.cc       text
+*.ld       text
+*.py       text
+*.md       text
+*.yml      text
+*.json     text
+LICENSE    text
+
+# Windows build files should be crlf
+*.sln      text eol=crlf
+*.vcxproj* text eol=crlf
+
+# Linux build files should be lf
+Makefile   text eol=lf
+*.am       text eol=lf
+*.in       text eol=lf
+*.mk       text eol=lf
+*.ac       text eol=lf
+*.m4       text eol=lf
+
+# Prevent line ending detection for binary files
+*.pdf      binary
+*.jpg      binary

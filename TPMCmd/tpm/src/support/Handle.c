@@ -165,12 +165,12 @@ PermanentHandleGetPolicy(
     policyList->count = 0;
 
     // The maximum count of policies we may return is MAX_TAGGED_POLICIES
-    if(count > MAX_TAGGED_POLICIES) 
+    if(count > MAX_TAGGED_POLICIES)
         count = MAX_TAGGED_POLICIES;
 
     // Iterate permanent handle range
-    for(handle = NextPermanentHandle(handle); 
-        handle != 0; 
+    for(handle = NextPermanentHandle(handle);
+        handle != 0;
         handle = NextPermanentHandle(handle + 1))
     {
         TPM2B_DIGEST    policyDigest;
@@ -185,7 +185,7 @@ PermanentHandleGetPolicy(
             // policy to the list;
             policyList->policies[policyList->count].handle = handle;
             policyList->policies[policyList->count].policyHash.hashAlg = policyAlg;
-            MemoryCopy(&policyList->policies[policyList->count].policyHash.digest, 
+            MemoryCopy(&policyList->policies[policyList->count].policyHash.digest,
                        policyDigest.t.buffer, policyDigest.t.size);
             policyList->count++;
         }

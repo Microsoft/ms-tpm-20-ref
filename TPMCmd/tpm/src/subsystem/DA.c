@@ -103,7 +103,7 @@ DAStartup(
         else
         {
             // If we know how much time was accumulated at the last orderly shutdown
-            // subtract that from the saved timer values so that they effectively 
+            // subtract that from the saved timer values so that they effectively
             // have the accumulated values
             s_selfHealTimer -= go.time;
             s_lockoutTimer -= go.time;
@@ -195,7 +195,7 @@ DASelfHeal(
 
             // Cast s_selfHealTimer to an int in case it became negative at
             // startup
-            decreaseCount = ((g_time - (INT64)s_selfHealTimer) / 1000) 
+            decreaseCount = ((g_time - (INT64)s_selfHealTimer) / 1000)
                 / gp.recoveryTime;
 
             if(gp.failedTries <= (UINT32)decreaseCount)

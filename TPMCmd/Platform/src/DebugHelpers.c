@@ -39,7 +39,7 @@
 //    The implementation may become more sophisticated over time.
 //
 
-//** Includes and Local 
+//** Includes and Local
 #include <stdio.h>
 #include <time.h>
 #include "Platform.h"
@@ -52,7 +52,7 @@ const char      *debugFileName = "DebugFile.txt";
 // This exists to allow use of the 'safe' version of fopen() with a MS runtime.
 static FILE *
 fileOpen(
-    const char      *fn, 
+    const char      *fn,
     const char      *mode
 )
 {

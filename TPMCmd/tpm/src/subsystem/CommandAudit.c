@@ -214,9 +214,9 @@ CommandAuditCapGetCCList(
             {
                 // If we have not filled up the return list, add this command
                 // code to its
-                TPM_CC      cc = GET_ATTRIBUTE(s_ccAttr[commandIndex], 
+                TPM_CC      cc = GET_ATTRIBUTE(s_ccAttr[commandIndex],
                                                TPMA_CC, commandIndex);
-                if(IS_ATTRIBUTE(s_ccAttr[commandIndex], TPMA_CC, V))   
+                if(IS_ATTRIBUTE(s_ccAttr[commandIndex], TPMA_CC, V))
                     cc += (1 << 29);
                 commandList->commandCodes[commandList->count] = cc;
                 commandList->count++;

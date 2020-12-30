@@ -106,7 +106,7 @@ TPM2B_SHA512    c_SHA512_digest = {{64, {
 TPM2B_TYPE(EMPTY, 1);
 
 #if ALG_SM3_256 == YES
-TPM2B_EMPTY c_SM3_256_digest = {{0, {0}}}; 
+TPM2B_EMPTY c_SM3_256_digest = {{0, {0}}};
 #endif
 
 #if ALG_SHA3_256 == YES
@@ -120,4 +120,3 @@ TPM2B_EMPTY c_SHA3_384_digest = {{0, {0}}};
 #if ALG_SHA3_512 == YES
 TPM2B_EMPTY c_SHA3_512_digest = {{0, {0}}};
 #endif
-

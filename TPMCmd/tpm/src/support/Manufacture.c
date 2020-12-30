@@ -49,7 +49,7 @@
 // use. This function will fail if previously called. The TPM can be re-manufactured
 // by calling TPM_Teardown() first and then calling this function again.
 //  Return Type: int
-//      -1          failure 
+//      -1          failure
 //      0           success
 //      1           manufacturing process previously performed
 LIB_EXPORT int
@@ -60,7 +60,7 @@ TPM_Manufacture(
 {
     TPM_SU          orderlyShutdown;
 
-#if RUNTIME_SIZE_CHECKS 
+#if RUNTIME_SIZE_CHECKS
     // Call the function to verify the sizes of values that result from different
     // compile options.
     if(!TpmSizeChecks())

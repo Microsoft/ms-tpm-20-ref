@@ -515,9 +515,9 @@ CryptEccIsValidPrivateKey(
 //*** BnPointMul()
 // This function does a point multiply of the form 'R' = ['d']'S' + ['u']'Q' where the
 // parameters are bigNum values. If 'S' is NULL and d is not NULL, then it computes
-// 'R' = ['d']'G' + ['u']'Q'  or just 'R' = ['d']'G' if 'u' and 'Q' are NULL. 
-// If 'skipChecks' is TRUE, then the function will not verify that the inputs are 
-// correct for the domain. This would be the case when the values were created by the 
+// 'R' = ['d']'G' + ['u']'Q'  or just 'R' = ['d']'G' if 'u' and 'Q' are NULL.
+// If 'skipChecks' is TRUE, then the function will not verify that the inputs are
+// correct for the domain. This would be the case when the values were created by the
 // CryptoEngine code.
 // It will return TPM_RC_NO_RESULT if the resulting point is the point at infinity.
 //  Return Type: TPM_RC
@@ -577,7 +577,7 @@ BnPointMult(
 }
 
 //***BnEccGetPrivate()
-// This function gets random values that are the size of the key plus 64 bits. The 
+// This function gets random values that are the size of the key plus 64 bits. The
 // value is reduced (mod ('q' - 1)) and incremented by 1 ('q' is the order of the
 // curve. This produces a value ('d') such that 1 <= 'd' < 'q'. This is the method
 // of FIPS 186-4 Section B.4.1 ""Key Pair Generation Using Extra Random Bits"".

@@ -75,21 +75,21 @@ EncryptDecryptShared(
     if(symKey->publicArea.type != TPM_ALG_SYMCIPHER)
         return TPM_RCS_KEY + RC_EncryptDecrypt_keyHandle;
     // The key must be unrestricted and allow the selected operation
-    OK = !IS_ATTRIBUTE(symKey->publicArea.objectAttributes, 
+    OK = !IS_ATTRIBUTE(symKey->publicArea.objectAttributes,
                        TPMA_OBJECT, restricted);
     if(YES == decryptIn)
-        OK = OK && IS_ATTRIBUTE(symKey->publicArea.objectAttributes, 
+        OK = OK && IS_ATTRIBUTE(symKey->publicArea.objectAttributes,
                                 TPMA_OBJECT, decrypt);
     else
-        OK = OK && IS_ATTRIBUTE(symKey->publicArea.objectAttributes, 
+        OK = OK && IS_ATTRIBUTE(symKey->publicArea.objectAttributes,
                                 TPMA_OBJECT, sign);
     if(!OK)
         return TPM_RCS_ATTRIBUTES + RC_EncryptDecrypt_keyHandle;
 
     // Make sure that key is an encrypt/decrypt key and not SMAC
     if(!CryptSymModeIsValid(mode, TRUE))
-       return TPM_RCS_MODE + RC_EncryptDecrypt_keyHandle; 
-    
+       return TPM_RCS_MODE + RC_EncryptDecrypt_keyHandle;
+
     // If the key mode is not TPM_ALG_NULL...
     // or TPM_ALG_NULL
     if(mode != TPM_ALG_NULL)

@@ -47,21 +47,21 @@
 
 //** Typedefs
 // These defines are used primarily for sizing of the local response buffer.
-typedef struct 
+typedef struct
 {
     TPM_ST          tag;
     UINT32          size;
     TPM_RC          code;
 } HEADER;
 
-typedef struct 
+typedef struct
 {
     BYTE            tag[sizeof(TPM_ST)];
     BYTE            size[sizeof(UINT32)];
     BYTE            code[sizeof(TPM_RC)];
 } PACKED_HEADER;
 
-typedef struct 
+typedef struct
 {
     BYTE             size[sizeof(UINT16)];
     struct
@@ -77,7 +77,7 @@ typedef struct
 {
     BYTE         moreData[sizeof(TPMI_YES_NO)];
     BYTE         capability[sizeof(TPM_CAP)]; // Always TPM_CAP_TPM_PROPERTIES
-    BYTE         tpmProperty[sizeof(TPML_TAGGED_TPM_PROPERTY)]; 
+    BYTE         tpmProperty[sizeof(TPML_TAGGED_TPM_PROPERTY)];
 } GET_CAPABILITY_PARAMETERS;
 
 typedef struct

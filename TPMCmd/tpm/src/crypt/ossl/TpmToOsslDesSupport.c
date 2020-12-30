@@ -58,7 +58,7 @@ TDES_set_encrypt_key(
 {
     DES_set_key_unchecked((const_DES_cblock *)key, &keySchedule[0]);
     DES_set_key_unchecked((const_DES_cblock *)&key[8], &keySchedule[1]);
-    // If is two-key, copy the schedule for K1 into K3, otherwise, compute the 
+    // If is two-key, copy the schedule for K1 into K3, otherwise, compute the
     // the schedule for K3
     if(keySizeInBits == 128)
         keySchedule[2] = keySchedule[0];
@@ -73,13 +73,13 @@ TDES_set_encrypt_key(
 // schedules. OpenSSL wants the schedules referenced separately. This function
 // does that.
 void TDES_encrypt(
-    const BYTE              *in, 
+    const BYTE              *in,
     BYTE                    *out,
     tpmKeyScheduleTDES      *ks
     )
 {
     DES_ecb3_encrypt((const_DES_cblock *)in, (DES_cblock *)out,
-                     &ks[0], &ks[1], &ks[2], 
+                     &ks[0], &ks[1], &ks[2],
                      DES_ENCRYPT);
 }
 
@@ -93,7 +93,7 @@ void TDES_decrypt(
     )
 {
     DES_ecb3_encrypt((const_DES_cblock *)in, (DES_cblock *)out,
-                     &ks[0], &ks[1], &ks[2], 
+                     &ks[0], &ks[1], &ks[2],
                      DES_DECRYPT);
 }
 

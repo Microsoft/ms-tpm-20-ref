@@ -58,13 +58,13 @@ TPM2_NV_UndefineSpace(
 
 // Input Validation
     // This command can't be used to delete an index with TPMA_NV_POLICY_DELETE SET
-    if(IS_ATTRIBUTE(nvIndex->publicArea.attributes, TPMA_NV, POLICY_DELETE))   
+    if(IS_ATTRIBUTE(nvIndex->publicArea.attributes, TPMA_NV, POLICY_DELETE))
         return TPM_RCS_ATTRIBUTES + RC_NV_UndefineSpace_nvIndex;
 
     // The owner may only delete an index that was defined with ownerAuth. The
     // platform may delete an index that was created with either authorization.
     if(in->authHandle == TPM_RH_OWNER
-       && IS_ATTRIBUTE(nvIndex->publicArea.attributes, TPMA_NV, PLATFORMCREATE))  
+       && IS_ATTRIBUTE(nvIndex->publicArea.attributes, TPMA_NV, PLATFORMCREATE))
         return TPM_RC_NV_AUTHORIZATION;
 
 // Internal Data Update

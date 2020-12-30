@@ -96,7 +96,7 @@ ComputeContextProtectionKey(
 
     // KDFa to generate symmetric key and IV value
     CryptKDFa(CONTEXT_INTEGRITY_HASH_ALG, &proof->b, CONTEXT_KEY, &sequence2B.b,
-              &handle2B.b, (symKey->t.size + iv->t.size) * 8, kdfResult, NULL, 
+              &handle2B.b, (symKey->t.size + iv->t.size) * 8, kdfResult, NULL,
               FALSE);
 
          // Copy part of the returned value as the key

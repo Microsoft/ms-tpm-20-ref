@@ -299,8 +299,8 @@ Exit:
 // For this math, we assume that the RSA numbers are fixed-point numbers with
 // the decimal point to the "left" of the most significant bit. This approach helps
 // make it clear what is happening with the MSb of the values.
-// The two RSA primes have to be large enough so that their product will be a number 
-// with the necessary number of significant bits. For example, we want to be able 
+// The two RSA primes have to be large enough so that their product will be a number
+// with the necessary number of significant bits. For example, we want to be able
 // to multiply two 1024-bit numbers to produce a number with 2028 significant bits. If
 // we accept any 1024-bit prime that has its MSb set, then it is possible to produce a
 // product that does not have the MSb SET. For example, if we use tiny keys of 16 bits
@@ -312,15 +312,15 @@ Exit:
 // This function adjusts the candidate prime so that it is odd and >= root(2)/2.
 // This allows the product of these two numbers to be .5, which, in fixed point
 // notation means that the most significant bit is 1.
-// For this routine, the root(2)/2 (0.7071067811865475) approximated with 0xB505 
+// For this routine, the root(2)/2 (0.7071067811865475) approximated with 0xB505
 // which is, in fixed point, 0.7071075439453125 or an error of 0.000108%. Just setting
-// the upper two bits would give a value > 0.75 which is an error of > 6%. Given the 
+// the upper two bits would give a value > 0.75 which is an error of > 6%. Given the
 // amount of time all the other computations take, reducing the error is not much of
 // a cost, but it isn't totally required either.
 //
-// This function can be replaced with a function that just sets the two most 
-// significant bits of each prime candidate without introducing any computational 
-// issues. 
+// This function can be replaced with a function that just sets the two most
+// significant bits of each prime candidate without introducing any computational
+// issues.
 //
 LIB_EXPORT void
 RsaAdjustPrimeCandidate(
@@ -353,10 +353,10 @@ RsaAdjustPrimeCandidate(
 // for an RSA prime.
 TPM_RC
 BnGeneratePrimeForRSA(
-    bigNum          prime,          // IN/OUT: points to the BN that will get the 
+    bigNum          prime,          // IN/OUT: points to the BN that will get the
                                     //  random value
     UINT32          bits,           // IN: number of bits to get
-    UINT32          exponent,       // IN: the exponent 
+    UINT32          exponent,       // IN: the exponent
     RAND_STATE      *rand           // IN: the random state
     )
 {
@@ -368,7 +368,7 @@ BnGeneratePrimeForRSA(
     pAssert((bits % 32) == 0);
 
     prime->size = BITS_TO_CRYPT_WORDS(bits);
-    
+
     while(!found)
     {
 // The change below is to make sure that all keys that are generated from the same

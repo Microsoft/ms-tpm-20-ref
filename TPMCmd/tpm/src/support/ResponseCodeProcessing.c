@@ -53,5 +53,3 @@ RcSafeAddToResult(
     else
         return responseCode;
 }
-
-

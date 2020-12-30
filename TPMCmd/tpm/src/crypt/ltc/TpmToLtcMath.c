@@ -114,7 +114,7 @@ BnDiv(
     else
     {
         pAssert((quotient == NULL)
-                || (quotient->allocated >= 
+                || (quotient->allocated >=
                         (unsigned)(dividend->size - divisor->size)));
         pAssert((remainder == NULL)
                 || (remainder->allocated >= divisor->size));

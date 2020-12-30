@@ -35,7 +35,7 @@
 //** Introduction
 //
 // This file contains the implementation of the message authentication codes based
-// on a symmetric block cipher. These functions only use the single block 
+// on a symmetric block cipher. These functions only use the single block
 // encryption functions of the selected symmetric cryptographic library.
 
 //** Includes, Defines, and Typedefs
@@ -68,7 +68,7 @@ CryptCmacStart(
     // set up the encryption algorithm and parameters
     cState->symAlg = def->algorithm;
     cState->keySizeBits = def->keyBits.sym;
-    cState->iv.t.size = CryptGetSymmetricBlockSize(def->algorithm, 
+    cState->iv.t.size = CryptGetSymmetricBlockSize(def->algorithm,
                                                    def->keyBits.sym);
     MemoryCopy2B(&cState->symKey.b, key, sizeof(cState->symKey.t.buffer));
 
@@ -134,7 +134,7 @@ CryptCmacEnd(
 )
 {
     tpmCmacState_t          *cState = &state->cmac;
-    // Need to set algorithm, key, and keySizeInBits in the local context so that  
+    // Need to set algorithm, key, and keySizeInBits in the local context so that
     // the SELECT and ENCRYPT macros will work here
     TPM_ALG_ID               algorithm = cState->symAlg;
     BYTE                    *key = cState->symKey.t.buffer;
@@ -185,4 +185,3 @@ CryptCmacEnd(
     return i;
 }
 #endif
-

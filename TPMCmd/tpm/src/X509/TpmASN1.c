@@ -80,10 +80,10 @@ ASN1DecodeLength(
     VERIFY(ctx->offset < ctx->size);
     first = NEXT_OCTET(ctx);
     // If the number of octets of the entity is larger than 127, then the first octet
-    // is the number of octets in the length specifier. 
+    // is the number of octets in the length specifier.
     if(first >= 0x80)
     {
-        // Make sure that this length field is contained with the structure being 
+        // Make sure that this length field is contained with the structure being
         // parsed
         CHECK_SIZE(ctx, (first & 0x7F));
         if(first == 0x82)
@@ -98,7 +98,7 @@ ASN1DecodeLength(
         }
         else if(first == 0x81)
             value = NEXT_OCTET(ctx);
-        // Sizes larger than will fit in a INT16 are an error 
+        // Sizes larger than will fit in a INT16 are an error
         else
             goto Error;
     }
@@ -113,7 +113,7 @@ Error:
 }
 
 //***ASN1NextTag()
-// This function extracts the next type from 'buffer' starting at 'offset'. 
+// This function extracts the next type from 'buffer' starting at 'offset'.
 // It advances 'offset' as it parses the type and the length of the type. It returns
 // the length of the type. On return, the 'length' octets starting at 'offset' are the
 // octets of the type.
@@ -122,7 +122,7 @@ Error:
 //     <0           an error
 INT16
 ASN1NextTag(
-    ASN1UnmarshalContext    *ctx 
+    ASN1UnmarshalContext    *ctx
 )
 {
     // A tag to get?
@@ -133,7 +133,7 @@ ASN1NextTag(
     VERIFY((ctx->tag & 0x1F) != 0x1F);
     // Get the length field and return that
     return ASN1DecodeLength(ctx);
-    
+
 Error:
     // Attempt to read beyond the end of the context or an illegal tag
     ctx->size = -1;         // Persistent failure
@@ -182,8 +182,8 @@ ASN1GetBitStringValue(
     }
     if(length == 1)
     {
-        // for the last octet, just shift the accumulated value enough to 
-        // accept the significant bits in the last octet and shift the last 
+        // for the last octet, just shift the accumulated value enough to
+        // accept the significant bits in the last octet and shift the last
         // octet down
         VERIFY(((value & (0xFF000000 << (8 - shift)))) == 0);
         value = (value << (8 - shift)) + (NEXT_OCTET(ctx) >> shift);
@@ -204,17 +204,17 @@ Error:
 //*******************************************************************
 
 //*** Introduction
-// Marshaling of an ASN.1 structure is accomplished from the bottom up. That is, 
+// Marshaling of an ASN.1 structure is accomplished from the bottom up. That is,
 // the things that will be at the end of the structure are added last. To manage the
 // collecting of the relative sizes, start a context for the outermost container, if
-// there is one, and then placing items in from the bottom up. If the bottom-most 
-// item is also within a structure, create a nested context by calling 
+// there is one, and then placing items in from the bottom up. If the bottom-most
+// item is also within a structure, create a nested context by calling
 // ASN1StartMarshalingContext().
 //
 // The context control structure contains a 'buffer' pointer, an 'offset', an 'end'
 // and a stack. 'offset' is the offset from the start of the buffer of the last added
 // byte. When 'offset' reaches 0, the buffer is full. 'offset' is a signed value so
-// that, when it becomes negative, there is an overflow. Only two functions are 
+// that, when it becomes negative, there is an overflow. Only two functions are
 // allowed to move bytes into the buffer: ASN1PushByte() and ASN1PushBytes(). These
 // functions make sure that no data is written beyond the end of the buffer.
 //
@@ -224,12 +224,12 @@ Error:
 //
 // Since starting a new context involves setting 'end' = 'offset', the number of bytes
 // in the context starts at 0. The nominal way of ending a context is to use
-// 'end' - 'offset' to set the length value, and then a tag is added to the buffer. 
-// Then the previous 'end' value is popped meaning that the context just ended 
+// 'end' - 'offset' to set the length value, and then a tag is added to the buffer.
+// Then the previous 'end' value is popped meaning that the context just ended
 // becomes a member of the now current context.
 //
 // The nominal strategy for building a completed ASN.1 structure is to push everything
-// into the buffer and then move everything to the start of the buffer. The move is 
+// into the buffer and then move everything to the start of the buffer. The move is
 // simple as the size of the move is the initial 'end' value minus the final 'offset'
 // value. The destination is 'buffer' and the source is 'buffer' + 'offset'. As Skippy
 // would say "Easy peasy, Joe."
@@ -240,10 +240,10 @@ Error:
 // the structure without using a buffer. This would return the overall size of the
 // structure. Then that amount of data could be allocated for the buffer and the fill
 // process executed again with the data going into the buffer. At the end, the data
-// would be in its final resting place. 
+// would be in its final resting place.
 
 //*** ASN1InitialializeMarshalContext()
-// This creates a structure for handling marshaling of an ASN.1 formatted data 
+// This creates a structure for handling marshaling of an ASN.1 formatted data
 // structure.
 void
 ASN1InitialializeMarshalContext(
@@ -348,7 +348,7 @@ ASN1PushBytes(
     const BYTE                  *buffer
 )
 {
-    // make sure that count is not negative which would mess up the math; and that 
+    // make sure that count is not negative which would mess up the math; and that
     // if there is a count, there is a buffer
     VERIFY((count >= 0) && ((buffer != NULL) || (count == 0)));
     // back up the offset to determine where the new octets will get pushed
@@ -356,7 +356,7 @@ ASN1PushBytes(
     // can't go negative
     VERIFY(ctx->offset >= 0);
     // if there are buffers, move the data, otherwise, assume that this is just a
-    // test. 
+    // test.
     if(count && buffer && ctx->buffer)
         MemoryCopy(&ctx->buffer[ctx->offset], buffer, count);
     return count;
@@ -432,7 +432,7 @@ ASN1PushTagAndLength(
 
 
 //*** ASN1PushTaggedOctetString()
-// This function will push a random octet string. 
+// This function will push a random octet string.
 //  Return Type: INT16
 //      > 0         number of bytes added
 //      == 0        failure
@@ -470,11 +470,11 @@ ASN1PushUINT(
 }
 
 //*** ASN1PushInteger
-// Push a big-endian integer on the end of the buffer 
+// Push a big-endian integer on the end of the buffer
 //  Return Type: UINT16
 //      > 0         the number of bytes marshaled for the integer
 //      == 0        failure
-INT16 
+INT16
 ASN1PushInteger(
     ASN1MarshalContext  *ctx,           // IN/OUT: buffer context
     INT16                iLen,          // IN: octets of the integer
@@ -496,7 +496,7 @@ ASN1PushInteger(
 }
 
 //*** ASN1PushOID()
-// This function is used to add an OID. An OID is 0x06 followed by a byte of size 
+// This function is used to add an OID. An OID is 0x06 followed by a byte of size
 // followed by size bytes. This is used to avoid having to do anything special in the
 // definition of an OID.
 //  Return Type: UINT16
@@ -515,5 +515,3 @@ ASN1PushOID(
     ctx->offset = -1;
     return 0;
 }
-
-

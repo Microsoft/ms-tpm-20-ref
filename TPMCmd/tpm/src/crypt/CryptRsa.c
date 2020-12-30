@@ -70,7 +70,7 @@ CryptRsaStartup(
 //** Internal Functions
 
 //*** RsaInitializeExponent()
-// This function initializes the bignum data structure that holds the private 
+// This function initializes the bignum data structure that holds the private
 // exponent. This function returns the pointer to the private exponent value so that
 // it can be used in an initializer for a data declaration.
 static privateExponent *
@@ -93,7 +93,7 @@ RsaInitializeExponent(
 // This function swaps the pointers for P and Q if Q happens to be larger than Q.
 static void
 MakePgreaterThanQ(
-    privateExponent         *Z      
+    privateExponent         *Z
 )
 {
     if(BnUnsignedCmp(Z->P, Z->Q) < 0)
@@ -110,8 +110,8 @@ MakePgreaterThanQ(
 // buffer contains 5, equal sized values in P, Q, dP, dQ, qInv order. For example, if
 // a key has a 2Kb public key, then the packed private key will contain 5, 1Kb values.
 // This form makes it relatively easy to load and save the values without changing
-// the normal unmarshaling to do anything more than allow a larger TPM2B for the 
-// private key. Also, when exporting the value, all that is needed is to change the 
+// the normal unmarshaling to do anything more than allow a larger TPM2B for the
+// private key. Also, when exporting the value, all that is needed is to change the
 // size field of the private key in order to save just the P value.
 //  Return Type: BOOL
 //      TRUE(1)     success
@@ -253,7 +253,7 @@ RSAEP(
                                 //      decrypted value
     OBJECT      *key            // IN: the key to use
     )
-{     
+{
     TPM2B_TYPE(4BYTES, 4);
     TPM2B_4BYTES        e2B;
     UINT32              e = key->publicArea.parameters.rsaDetail.exponent;
@@ -287,17 +287,17 @@ RSADP(
 {
     BN_RSA_INITIALIZED(bnM, inOut);
     NEW_PRIVATE_EXPONENT(Z);
-    if(UnsignedCompareB(inOut->size, inOut->buffer, 
-                     key->publicArea.unique.rsa.t.size, 
+    if(UnsignedCompareB(inOut->size, inOut->buffer,
+                     key->publicArea.unique.rsa.t.size,
                      key->publicArea.unique.rsa.t.buffer) >= 0)
         return TPM_RC_SIZE;
     // private key operation requires that private exponent be loaded
-    // During self-test, this might not be the case so load it up if it hasn't 
+    // During self-test, this might not be the case so load it up if it hasn't
     // already done
     // been done
     if((key->sensitive.sensitive.rsa.t.size & RSA_prime_flag) == 0)
     {
-        if(CryptRsaLoadPrivateExponent(&key->publicArea, &key->sensitive) 
+        if(CryptRsaLoadPrivateExponent(&key->publicArea, &key->sensitive)
            != TPM_RC_SUCCESS)
             return TPM_RC_BINDING;
     }
@@ -795,7 +795,7 @@ MakeDerTag(
 //    0x30, 0x31,       // SEQUENCE (2 elements) 1st
 //        0x30, 0x0D,   // SEQUENCE (2 elements)
 //            0x06, 0x09,   // HASH OID
-//                0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 
+//                0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01,
 //             0x05, 0x00,  // NULL
 //        0x04, 0x20  //  OCTET STRING
     HASH_DEF   *info = CryptGetHashDef(hashAlg);
@@ -1300,7 +1300,7 @@ Exit:
 
 #if SIMULATION && USE_RSA_KEY_CACHE
 extern int s_rsaKeyCacheEnabled;
-int GetCachedRsaKey(TPMT_PUBLIC *publicArea, TPMT_SENSITIVE *sensitive, 
+int GetCachedRsaKey(TPMT_PUBLIC *publicArea, TPMT_SENSITIVE *sensitive,
                     RAND_STATE *rand);
 #define GET_CACHED_KEY(publicArea, sensitive, rand)                       \
             (s_rsaKeyCacheEnabled && GetCachedRsaKey(publicArea, sensitive, rand))
@@ -1437,7 +1437,7 @@ CryptRsaGenerateKey(
                (NUMBYTES)BITS_TO_BYTES(keySizeInBits));
         // Make sure everything came out right. The MSb of the values must be one
         if(((publicArea->unique.rsa.t.buffer[0] & 0x80) == 0)
-            || (publicArea->unique.rsa.t.size 
+            || (publicArea->unique.rsa.t.size
                 != (NUMBYTES)BITS_TO_BYTES(keySizeInBits)))
             FAIL(FATAL_ERROR_INTERNAL);
 
@@ -1452,7 +1452,7 @@ CryptRsaGenerateKey(
                 BnCopy(Z->Q, Z->P);
             continue;
         }
-        
+
         // Pack the private exponent into the sensitive area
         PackExponent(&sensitive->sensitive.rsa, Z);
         // Make sure everything came out right. The MSb of the values must be one

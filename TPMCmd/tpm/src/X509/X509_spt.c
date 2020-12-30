@@ -198,7 +198,7 @@ X509ProcessExtensions(
         badDecrypt = ((KEY_USAGE_DECRYPT.integer & keyUsage.integer) != 0)
                      && !IS_ATTRIBUTE(attributes, TPMA_OBJECT, decrypt);
         // 3) 'fixedTPM' is SET if Key Usage is non-repudiation
-        badFixedTPM = IS_ATTRIBUTE(keyUsage.x509, TPMA_X509_KEY_USAGE, 
+        badFixedTPM = IS_ATTRIBUTE(keyUsage.x509, TPMA_X509_KEY_USAGE,
                                      nonrepudiation)
                       && !IS_ATTRIBUTE(attributes, TPMA_OBJECT, fixedTPM);
         // 4)'restricted' is SET if Key Usage is for key agreement.
@@ -238,7 +238,7 @@ X509AddSigningAlgorithm(
         case TPM_ALG_ECC:
             return X509AddSigningAlgorithmECC(signKey, scheme, ctx);
 #endif // ALG_ECC
-#if ALG_SM2  
+#if ALG_SM2
         case TPM_ALG_SM2:
             break;  // no signing algorithm for SM2 yet
 //            return X509AddSigningAlgorithmSM2(signKey, scheme, ctx);

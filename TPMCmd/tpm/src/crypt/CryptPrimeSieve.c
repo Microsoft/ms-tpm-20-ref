@@ -242,7 +242,7 @@ const SIEVE_MARKS sieveMarks[5] = {
 // To get better performance, one could address the issue of developing the
 // composite numbers. When the size of the prime gets large, the time for doing
 // the divisions goes up, noticeably. It could be better to develop larger composite
-// numbers even if they need to be bigNum's themselves. The object would be to 
+// numbers even if they need to be bigNum's themselves. The object would be to
 // reduce the number of times that the large prime is divided into a few large
 // divides and then use smaller divides to get to the final 16 bit (or smaller)
 // remainders.
@@ -326,7 +326,7 @@ PrimeSieve(
             r = composite % next;
         // these computations deal with the fact that we have picked a field-sized
         // range that is aligned to a 105 count boundary. The problem is, this field
-        // only contains odd numbers. If we take our prime guess and walk through all 
+        // only contains odd numbers. If we take our prime guess and walk through all
         // the numbers using that prime as the 'stride', then every other 'stride' is
         // going to be an even number. So, we are actually counting by 2 * the stride
         // We want the count to start on an odd number at the start of our field. That
@@ -337,11 +337,11 @@ PrimeSieve(
         // count was from reaching the edge of the bit field. Say we get a quotient of
         // 3 and remainder of 1. This means that after 3 strides, we are 1 short of
         // the start of the field and the next stride will either land within the
-        // field or step completely over it. The confounding factor is that our field 
+        // field or step completely over it. The confounding factor is that our field
         // only contains odd numbers and our stride is actually 2 * stride. If the
         // quoitent is even, then that means that when we add 2 * stride, we are going
         // to hit another even number. So, we have to know if we need to back off
-        // by 1 stride before we start couting by 2 * stride. 
+        // by 1 stride before we start couting by 2 * stride.
         // We can tell from the remainder whether we are on an even or odd
         // stride when we hit the beginning of the table. If we are on an odd stride
         // (r & 1), we would start half a stride in (next - r)/2. If we are on an
@@ -350,7 +350,7 @@ PrimeSieve(
         // table is on stride so no adjustment is necessary.
             if(r & 1)           j = (next - r) / 2;
             else if(r == 0)     j = 0;
-            else                 j = next - (r / 2); 
+            else                 j = next - (r / 2);
             for(; j < fieldBits; j += next)
                 ClearBit(j, field, fieldSize);
         }
@@ -422,7 +422,7 @@ PrimeSelectWithSieve(
     UINT32           primeSize;
 //
     // Adjust the field size and prime table list to fit the size of the prime
-    // being tested. This is done to try to optimize the trade-off between the 
+    // being tested. This is done to try to optimize the trade-off between the
     // dividing done for sieving and the time for Miller-Rabin. When the size
     // of the prime is large, the cost of Miller-Rabin is fairly high, as is the
     // cost of the sieving. However, the time for Miller-Rabin goes up considerably
@@ -462,7 +462,7 @@ PrimeSelectWithSieve(
 
         // The exponent might not have been one of the tested primes so
         // make sure that it isn't divisible and make sure that 0 != (p-1) mod e
-        // Note: This is the same as 1 != p mod e 
+        // Note: This is the same as 1 != p mod e
         modE = (UINT32)BnModWord(test, e);
         if((modE != 0) && (modE != 1) && MillerRabin(test, rand))
         {
@@ -513,11 +513,11 @@ RsaSimulationEnd(
                            != 0 ? bitsInFieldAfterSieve[i] / totalFieldsSieved[i]
                            : 0);
         printf("Average candidates in field %s\n", PrintTuple(averages));
-        for(i = 1; i < (sizeof(failedAtIteration) / sizeof(failedAtIteration[0])); 
+        for(i = 1; i < (sizeof(failedAtIteration) / sizeof(failedAtIteration[0]));
         i++)
             nonFirst += failedAtIteration[i];
         printf("Miller-Rabin failures not in first round = %d\n", nonFirst);
-            
+
     }
     CLEAR_VALUE(PrimeCounts);
     CLEAR_VALUE(totalFieldsSieved);
@@ -538,9 +538,9 @@ GetSieveStats(
     uint32_t        fields;
     *trials = MillerRabinTrials[0] + MillerRabinTrials[1] + MillerRabinTrials[2];
     *emptyFields = noPrimeFields[0] + noPrimeFields[1] + noPrimeFields[2];
-    fields = totalFieldsSieved[0] + totalFieldsSieved[1] 
+    fields = totalFieldsSieved[0] + totalFieldsSieved[1]
         + totalFieldsSieved[2];
-    totalBits = bitsInFieldAfterSieve[0] + bitsInFieldAfterSieve[1] 
+    totalBits = bitsInFieldAfterSieve[0] + bitsInFieldAfterSieve[1]
         + bitsInFieldAfterSieve[2];
     if(fields != 0)
         *averageBits = totalBits / fields;
@@ -560,7 +560,7 @@ GetSieveStats(
 #if !RSA_INSTRUMENT
 
 //*** RsaSimulationEnd()
-// Stub for call when not doing instrumentation. 
+// Stub for call when not doing instrumentation.
 void
 RsaSimulationEnd(
     void

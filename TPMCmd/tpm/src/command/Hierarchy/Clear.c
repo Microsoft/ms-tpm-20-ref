@@ -114,7 +114,7 @@ TPM2_Clear(
 
     // Bump the PCR counter
     PCRChanged(0);
-    
+
 
     // orderly state should be cleared because of the update to state clear data
     g_clearOrderly = TRUE;

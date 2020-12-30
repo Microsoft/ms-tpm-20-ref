@@ -151,7 +151,7 @@ typedef UINT32 NV_LIST_TERMINATOR[3];
     if(NvClearOrderly() != TPM_RC_SUCCESS)          \
         return g_NvStatus;                          \
 }
- 
+
 #define NV_IS_AVAILABLE     (g_NvStatus == TPM_RC_SUCCESS)
 
 #define IS_ORDERLY(value)   (value < SU_DA_USED_VALUE)
@@ -161,5 +161,5 @@ typedef UINT32 NV_LIST_TERMINATOR[3];
 // Macro to set the NV UPDATE_TYPE. This deals with the fact that the update is
 // possibly a combination of UT_NV and UT_ORDERLY.
 #define SET_NV_UPDATE(type)     g_updateNV |= (type)
-    
+
 #endif  // _NV_H_

@@ -92,7 +92,7 @@ EntityGetLoadStatus(
                         // for policy checks but not always available when authValue
                         // is being checked.
                     case TPM_RH_LOCKOUT:
-                    // Rather than have #ifdefs all over the code, 
+                    // Rather than have #ifdefs all over the code,
                     // CASE_ACT_HANDLE is defined in ACT.h. It is 'case TPM_RH_ACT_x:'
                     // FOR_EACH_ACT(CASE_ACT_HANDLE) creates a simple
                     // case TPM_RH_ACT_x: // for each of the implemented ACT.
@@ -108,7 +108,7 @@ EntityGetLoadStatus(
                             // if the implementation has a manufacturer-specific value
                             result = TPM_RC_VALUE;
                         else
-                            // The handle is in the range of reserved handles but is 
+                            // The handle is in the range of reserved handles but is
                             // not implemented in this TPM.
                             result = TPM_RC_VALUE;
                         break;

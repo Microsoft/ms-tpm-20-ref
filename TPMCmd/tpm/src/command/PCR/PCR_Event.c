@@ -65,7 +65,7 @@ TPM2_PCR_Event(
         // If PCR is state saved and we need to update orderlyState, check NV
         // availability
         if(PCRIsStateSaved(in->pcrHandle))
-            RETURN_IF_ORDERLY; 
+            RETURN_IF_ORDERLY;
     }
 
 // Internal Data Update

@@ -69,7 +69,7 @@ TPM2_MakeCredential(
     // NOTE: Needs to be restricted to have a symmetric value.
     if(!CryptIsAsymAlgorithm(object->publicArea.type)
        || !IS_ATTRIBUTE(object->publicArea.objectAttributes, TPMA_OBJECT, decrypt)
-       || !IS_ATTRIBUTE(object->publicArea.objectAttributes, 
+       || !IS_ATTRIBUTE(object->publicArea.objectAttributes,
                         TPMA_OBJECT, restricted))
         return TPM_RCS_TYPE + RC_MakeCredential_handle;
 

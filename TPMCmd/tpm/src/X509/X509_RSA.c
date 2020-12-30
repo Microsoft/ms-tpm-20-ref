@@ -80,7 +80,7 @@ X509AddSigningAlgorithmRSA(
             // leave if this is just an implementation check
             if(ctx == NULL)
                 return 1;
-            // In the case of SHA1, everything is default and RFC4055 says that 
+            // In the case of SHA1, everything is default and RFC4055 says that
             // implementations that do signature generation MUST omit the parameter
             // when defaults are used. )-:
             if(hashDef->hashAlg == TPM_ALG_SHA1)
@@ -95,7 +95,7 @@ X509AddSigningAlgorithmRSA(
                 //     SEQUENCE (3 elem)
                 //       [0] (1 elem)
                 //         SEQUENCE (2 elem)
-                //           OBJECT IDENTIFIER 2.16.840.1.101.3.4.2.1 sha-256 
+                //           OBJECT IDENTIFIER 2.16.840.1.101.3.4.2.1 sha-256
                 //           NULL
                 //       [1] (1 elem)
                 //         SEQUENCE (2 elem)
@@ -106,7 +106,7 @@ X509AddSigningAlgorithmRSA(
                 //       [2] (1 elem)  salt length
                 //         INTEGER 32
 
-                // The indentation is just to keep track of where we are in the 
+                // The indentation is just to keep track of where we are in the
                 // structure
                 ASN1StartMarshalContext(ctx); // SEQUENCE (2 elements)
                 {
@@ -127,7 +127,7 @@ X509AddSigningAlgorithmRSA(
                         // [1] (1 elem)
                         //    SEQUENCE (2 elem) 1st
                         //      OBJECT IDENTIFIER 1.2.840.113549.1.1.8 pkcs1-MGF
-                        //      SEQUENCE (2 elem) 2nd  
+                        //      SEQUENCE (2 elem) 2nd
                         //        OBJECT IDENTIFIER 2.16.840.1.101.3.4.2.1 sha-256
                         //        NULL
                         ASN1StartMarshalContext(ctx);   // mask context [1] (1 elem)
@@ -139,18 +139,18 @@ X509AddSigningAlgorithmRSA(
                                 // wrapper.
                                 X509PushAlgorithmIdentifierSequence(ctx,
                                     hashDef->OID);
-                                // add the pkcs1-MGF OID 
+                                // add the pkcs1-MGF OID
                                 ASN1PushOID(ctx, OID_MGF1);
                             }
                             // End outer sequence
                             ASN1EndEncapsulation(ctx, ASN1_CONSTRUCTED_SEQUENCE);
                         }
-                        // End the [1] 
+                        // End the [1]
                         ASN1EndEncapsulation(ctx, ASN1_APPLICAIION_SPECIFIC + 1);
 
                         // Add the hash algorithm
                         // [0] (1 elem)
-                        //   SEQUENCE (2 elem) (done by 
+                        //   SEQUENCE (2 elem) (done by
                         //              X509PushAlgorithmIdentifierSequence)
                         //     OBJECT IDENTIFIER 2.16.840.1.101.3.4.2.1 sha-256 (NIST)
                         //     NULL
@@ -177,7 +177,7 @@ X509AddSigningAlgorithmRSA(
 }
 
 //*** X509AddPublicRSA()
-// This function will add the publicKey description to the DER data. If fillPtr is 
+// This function will add the publicKey description to the DER data. If fillPtr is
 // NULL, then no data is transferred and this function will indicate if the TPM
 // has the values for DER-encoding of the public key.
 //  Return Type: INT16
@@ -198,10 +198,10 @@ X509AddPublicRSA(
         NULL
       BIT STRING (1 elem)
         SEQUENCE (2 elem) 3rd
-          INTEGER (2048 bit) 2197304513741227955725834199357401…
+          INTEGER (2048 bit) 2197304513741227955725834199357401
           INTEGER 65537
 */
-    // If this is a check to see if the key can be encoded, it can. 
+    // If this is a check to see if the key can be encoded, it can.
     // Need to mark the end sequence
     if(ctx == NULL)
         return 1;
@@ -221,7 +221,7 @@ X509AddPublicRSA(
                              object->publicArea.unique.rsa.t.buffer);
     // Embed this in a SEQUENCE tag and length in for the key, exponent sequence
     ASN1EndEncapsulation(ctx, ASN1_CONSTRUCTED_SEQUENCE); // SEQUENCE (3rd)
-                                 
+
     // Embed this in a BIT STRING
     ASN1EndEncapsulation(ctx, ASN1_BITSTRING);
 

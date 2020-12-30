@@ -56,7 +56,7 @@ TPM2_NV_ChangeAuth(
 
     // Remove trailing zeros and make sure that the result is not larger than the
     // digest of the nameAlg.
-    if(MemoryRemoveTrailingZeros(&in->newAuth) 
+    if(MemoryRemoveTrailingZeros(&in->newAuth)
        > CryptHashGetDigestSize(nvIndex->publicArea.nameAlg))
         return TPM_RCS_SIZE + RC_NV_ChangeAuth_newAuth;
 

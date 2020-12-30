@@ -124,8 +124,8 @@ TPM2_StartAuthSession(
             // it might be possible to bind to an object where the authValue is
             // known. This does not create a real issue in that, if you know the
             // authorization value, you can actually bind to the object. However,
-            // there is a potential 
-            if(object->attributes.publicOnly == SET) 
+            // there is a potential
+            if(object->attributes.publicOnly == SET)
                 return TPM_RCS_HANDLE + RC_StartAuthSession_bind;
             break;
         }

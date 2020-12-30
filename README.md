@@ -35,7 +35,7 @@ Windows build is implemented as a Visual Studio 2017 solution. Before building i
         > git submodule init
         > git submodule update
 
-        The current commit will point the minimum recommended version of wolfSSL. Moving to a more recent tag or commit should also be supported but might not be tested. 
+        The current commit will point the minimum recommended version of wolfSSL. Moving to a more recent tag or commit should also be supported but might not be tested.
 
    2. Build the solution with either WolfDebug or WolfRelease as the active configuration, either from inside the Visual Studio or with the following command line:
 

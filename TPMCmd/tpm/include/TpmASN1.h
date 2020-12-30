@@ -98,9 +98,9 @@
 //*** Marshaling Macros
 
 // Marshaling works in reverse order. The offset is set to the top of the buffer and,
-// as the buffer is filled, 'offset' counts down to zero. When the full thing is 
-// encoded it can be moved to the top of the buffer. This happens when the last 
-// context is closed. 
+// as the buffer is filled, 'offset' counts down to zero. When the full thing is
+// encoded it can be moved to the top of the buffer. This happens when the last
+// context is closed.
 
 #define CHECK_SPACE(context, length)    VERIFY(context->offset > length)
 
@@ -108,9 +108,9 @@
 
 typedef struct ASN1UnmarshalContext {
     BYTE            *buffer;    // pointer to the buffer
-    INT16            size;      // size of the buffer (a negative number indicates 
+    INT16            size;      // size of the buffer (a negative number indicates
                                 // a parsing failure).
-    INT16            offset;    // current offset into the buffer (a negative number 
+    INT16            offset;    // current offset into the buffer (a negative number
                                 // indicates a parsing failure). Not used
     BYTE             tag;       // The last unmarshaled tag
 } ASN1UnmarshalContext;

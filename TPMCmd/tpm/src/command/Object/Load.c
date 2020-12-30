@@ -96,7 +96,7 @@ TPM2_Load(
     if(out->name.t.size == 0)
         return TPM_RCS_HASH + RC_Load_inPublic;
 
-    // Retrieve sensitive data. 
+    // Retrieve sensitive data.
     result = PrivateToSensitive(&in->inPrivate.b, &out->name.b, parentObject,
                                 in->inPublic.publicArea.nameAlg,
                                 &sensitive);
@@ -105,8 +105,8 @@ TPM2_Load(
 
 // Internal Data Update
     // Load and validate object
-    result = ObjectLoad(newObject, parentObject, 
-                        &in->inPublic.publicArea, &sensitive, 
+    result = ObjectLoad(newObject, parentObject,
+                        &in->inPublic.publicArea, &sensitive,
                         RC_Load_inPublic, RC_Load_inPrivate,
                         &out->name);
     if(result == TPM_RC_SUCCESS)

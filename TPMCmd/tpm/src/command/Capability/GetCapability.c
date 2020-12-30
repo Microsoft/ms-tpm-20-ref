@@ -167,7 +167,7 @@ TPM2_GetCapability(
                                                      &data->authPolicies);
             break;
         case TPM_CAP_ACT:
-            if(((TPM_RH)in->property < TPM_RH_ACT_0) 
+            if(((TPM_RH)in->property < TPM_RH_ACT_0)
                || ((TPM_RH)in->property > TPM_RH_ACT_F))
                 return TPM_RCS_VALUE + RC_GetCapability_property;
             out->moreData = ActGetCapabilityData((TPM_HANDLE)in->property,

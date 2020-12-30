@@ -127,7 +127,7 @@ SHA1_OID(_);        // Expands to:
                     // or
                     //      const BYTE           OID_SHA1[] = {OID_SHA1_VALUE}
                     // which is:
-                    //      const BYTE           OID_SHA1[] = {0x06, 0x05, 0x2B, 0x0E, 
+                    //      const BYTE           OID_SHA1[] = {0x06, 0x05, 0x2B, 0x0E,
                     //                                         0x03, 0x02, 0x1A}
 
 

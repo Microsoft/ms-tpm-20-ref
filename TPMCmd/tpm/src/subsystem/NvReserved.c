@@ -137,7 +137,7 @@ NvCommit(
 //  This function is called at _TPM_Init to initialize the NV environment.
 //  Return Type: BOOL
 //      TRUE(1)         all NV was initialized
-//      FALSE(0)        the NV containing saved state had an error and 
+//      FALSE(0)        the NV containing saved state had an error and
 //                      TPM2_Startup(CLEAR) is required
 BOOL
 NvPowerOn(

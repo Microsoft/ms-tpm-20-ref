@@ -71,7 +71,7 @@
 // This macro creates the entry in the array lookup table
 #define ARRAY_MARSHAL_ENTRY(TYPE)                                                   \
         {(marshalIndex_t)TYPE##_MARSHAL_REF, (UINT16)STRIDE(TYPE)}
-       
+
 // Defines for array lookup
 #define UINT8_ARRAY_MARSHAL_INDEX                   0   // 0x00
 #define TPM_CC_ARRAY_MARSHAL_INDEX                  1   // 0x01
@@ -89,7 +89,7 @@
 #define TPMS_ACT_DATA_ARRAY_MARSHAL_INDEX           13  // 0x0D
 #define TPMS_AC_OUTPUT_ARRAY_MARSHAL_INDEX          14  // 0x0E
 
-   
+
 // Defines for referencing a type by offset
 #define UINT8_MARSHAL_REF                           \
             ((UINT16)(offsetof(MarshalData_st, UINT8_DATA)))

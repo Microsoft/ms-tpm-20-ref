@@ -33,7 +33,7 @@
  *  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 //** Introduction
-// This file contains the functions that are used for the two-phase, ECC, 
+// This file contains the functions that are used for the two-phase, ECC,
 // key-exchange protocols
 
 
@@ -77,7 +77,7 @@ avf1(
 // CAUTION: Implementation of this function may require use of essential claims in
 // patents not owned by TCG members.
 //
-// Points 'QsB' and 'QeB' are required to be on the curve of 'inQsA'. The function 
+// Points 'QsB' and 'QeB' are required to be on the curve of 'inQsA'. The function
 // will fail, possibly catastrophically, if this is not the case.
 //  Return Type: TPM_RC
 //      TPM_RC_NO_RESULT        the value for dsA does not give a valid point on the
@@ -107,7 +107,7 @@ C_2_2_MQV(
     // Parameter checks
     if(E == NULL)
         ERROR_RETURN(TPM_RC_VALUE);
-    pAssert(outZ != NULL && pQeB != NULL && pQsB != NULL && deA != NULL 
+    pAssert(outZ != NULL && pQeB != NULL && pQsB != NULL && deA != NULL
             && dsA != NULL);
     C = AccessCurveData(E);
 // Process:
@@ -191,7 +191,7 @@ C_2_2_ECDH(
     // Parameter checks
     if(E == NULL)
         ERROR_RETURN(TPM_RC_CURVE);
-    pAssert(outZs != NULL && dsA != NULL && deA != NULL && QsB != NULL 
+    pAssert(outZs != NULL && dsA != NULL && deA != NULL && QsB != NULL
             && QeB != NULL);
 
     // Do the point multiply for the Zs value ([dsA]QsB)
@@ -277,8 +277,8 @@ ComputeWForSM2(
 // This function does the associated value computation required by SM2 key
 // exchange. This is different from the avf() in the international standards
 // because it returns a value that is half the size of the value returned by the
-// standard avf(). For example, if 'n' is 15, 'Ws' ('w' in the standard) is 2 but 
-// the 'W' here is 1. This means that an input value of 14 (1110b) would return a 
+// standard avf(). For example, if 'n' is 15, 'Ws' ('w' in the standard) is 2 but
+// the 'W' here is 1. This means that an input value of 14 (1110b) would return a
 // value of 110b with the standard but 10b with the scheme in SM2.
 static bigNum
 avfSm2(
@@ -338,7 +338,7 @@ SM2KeyExchange(
     if(E == NULL)
         ERROR_RETURN(TPM_RC_CURVE);
     C = AccessCurveData(E);
-    pAssert(outZ != NULL && dsA != NULL && deA != NULL &&  QsB != NULL 
+    pAssert(outZ != NULL && dsA != NULL && deA != NULL &&  QsB != NULL
             && QeB != NULL);
 
     // Compute the value for w

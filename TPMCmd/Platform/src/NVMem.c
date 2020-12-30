@@ -39,7 +39,7 @@
 //    The implementation may become more sophisticated over time.
 //
 
-//** Includes and Local 
+//** Includes and Local
 #include <memory.h>
 #include <string.h>
 #include <assert.h>
@@ -93,7 +93,7 @@ static int
 NvFileCommit(
     void
 )
-{    
+{
     int         OK;
     // If NV file is not available, return failure
     if(s_NvFile == NULL)
@@ -108,7 +108,7 @@ NvFileCommit(
 
 //*** NvFileSize()
 // This function gets the size of the NV file and puts the file pointer where desired
-// using the seek method values. SEEK_SET => beginning; SEEK_CUR => current position 
+// using the seek method values. SEEK_SET => beginning; SEEK_CUR => current position
 // and SEEK_END => to the end of the file.
 static long
 NvFileSize(
@@ -181,7 +181,7 @@ _plat__NVEnable(
     s_NV_unrecoverable = FALSE;
     s_NV_recoverable = FALSE;
 #if FILE_BACKED_NV
-    if(s_NvFile != NULL) 
+    if(s_NvFile != NULL)
         return 0;
     // Initialize all the bytes in the ram copy of the NV
     _plat__NvMemoryClear(0, NV_MEMORY_SIZE);
@@ -204,7 +204,7 @@ _plat__NVEnable(
             s_NeedsManufacture = TRUE;
         }
     }
-    // If NVChip file does not exist, try to create it for read/write. 
+    // If NVChip file does not exist, try to create it for read/write.
     else if(NvFileOpen("w+b") >= 0)
     {
         NvFileCommit();             // Initialize the file
@@ -304,10 +304,10 @@ _plat__NvIsDifferent(
 // This function is used to update NV memory. The "write" is to a memory copy of
 // NV. At the end of the current command, any changes are written to
 // the actual NV memory.
-// NOTE: A useful optimization would be for this code to compare the current 
+// NOTE: A useful optimization would be for this code to compare the current
 // contents of NV with the local copy and note the blocks that have changed. Then
 // only write those blocks when _plat__NvCommit() is called.
-LIB_EXPORT int 
+LIB_EXPORT int
 _plat__NvMemoryWrite(
     unsigned int     startOffset,   // IN: write start
     unsigned int     size,          // IN: size of bytes to write
@@ -398,7 +398,7 @@ _plat__ClearNvAvail(
 //*** _plat__NVNeedsManufacture()
 // This function is used by the simulator to determine when the TPM's NV state
 // needs to be manufactured.
-LIB_EXPORT int 
+LIB_EXPORT int
 _plat__NVNeedsManufacture(
     void
     )

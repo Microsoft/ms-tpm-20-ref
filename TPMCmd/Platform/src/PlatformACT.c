@@ -41,14 +41,14 @@
 // Function called when there is an ACT event to signal or unsignal
 static void
 ActSignal(
-    P_ACT_DATA          actData,        
+    P_ACT_DATA          actData,
     int                 on
 )
 {
     if(actData == NULL)
         return;
     // If this is to turn a signal on, don't do anything if it is already on. If this
-    // is to turn the signal off, do it anyway because this might be for 
+    // is to turn the signal off, do it anyway because this might be for
     // initialization.
     if(on && (actData->signaled == TRUE))
         return;
@@ -139,7 +139,7 @@ ActGetDataPointer(
 
     FOR_EACH_ACT(RETURN_ACT_POINTER)
 
-    return (P_ACT_DATA)NULL; 
+    return (P_ACT_DATA)NULL;
 }
 
 //*** _plat__ACT_GetImplemented()
@@ -147,7 +147,7 @@ ActGetDataPointer(
 // function because the TPM should not be calling to manipulate an ACT that is not
 // implemented. However, this could help the simulator code which doesn't necessarily
 // know if an ACT is implemented or not.
-LIB_EXPORT int 
+LIB_EXPORT int
 _plat__ACT_GetImplemented(
     uint32_t            act
 )
@@ -162,7 +162,7 @@ _plat__ACT_GetImplemented(
 // value will be no greater than the returned value.
 LIB_EXPORT uint32_t
 _plat__ACT_GetRemaining(
-    uint32_t            act             //IN: the ACT selector           
+    uint32_t            act             //IN: the ACT selector
 )
 {
     P_ACT_DATA              actData = ActGetDataPointer(act);
@@ -177,7 +177,7 @@ _plat__ACT_GetRemaining(
 }
 
 //*** _plat__ACT_GetSignaled()
-LIB_EXPORT int 
+LIB_EXPORT int
 _plat__ACT_GetSignaled(
     uint32_t            act         //IN: number of ACT to check
 )
@@ -200,7 +200,7 @@ _plat__ACT_SetSignaled(
 }
 
 //*** _plat__ACT_GetPending()
-LIB_EXPORT int 
+LIB_EXPORT int
 _plat__ACT_GetPending(
     uint32_t            act         //IN: number of ACT to check
 )
@@ -214,11 +214,11 @@ _plat__ACT_GetPending(
 
 
 //*** _plat__ACT_UpdateCounter()
-// This function is used to write the newValue for the counter. If an update is 
+// This function is used to write the newValue for the counter. If an update is
 // pending, then no update occurs and the function returns FALSE. If 'setSignaled'
 // is TRUE, then the ACT signaled state is SET and if 'newValue' is 0, nothing
 // is posted.
-LIB_EXPORT int 
+LIB_EXPORT int
 _plat__ACT_UpdateCounter(
     uint32_t            act,        // IN: ACT to update
     uint32_t            newValue   // IN: the value to post
@@ -227,7 +227,7 @@ _plat__ACT_UpdateCounter(
     P_ACT_DATA          actData = ActGetDataPointer(act);
  //
     if(actData == NULL)
-        // actData doesn't exist but pretend update is pending rather than indicate 
+        // actData doesn't exist but pretend update is pending rather than indicate
         // that a retry is necessary.
         return TRUE;
     // if an update is pending then return FALSE so that there will be a retry
@@ -252,7 +252,7 @@ _plat__ACT_EnableTicks(
 }
 
 //*** ActDecrement()
-// If 'newValue' is non-zero it is copied to 'remaining' and then 'newValue' is 
+// If 'newValue' is non-zero it is copied to 'remaining' and then 'newValue' is
 // set to zero. Then 'remaining' is decremented by one if it is not already zero. If
 // the value is decremented to zero, then the associated event is signaled. If setting
 // 'remaining' causes it to be greater than 1, then the signal associated with the ACT
@@ -292,14 +292,14 @@ ActDecrement(
 // This processes the once-per-second clock tick from the hardware. This is set up
 // for the simulator to use the control interface to send ticks to the TPM. These
 // ticks do not have to be on a per second basis. They can be as slow or as fast as
-// desired so that the simulation can be tested. 
+// desired so that the simulation can be tested.
 LIB_EXPORT void
 _plat__ACT_Tick(
     void
 )
 {
     // Ticks processing is turned off at certain times just to make sure that nothing
-    // strange is happening before pointers and things are 
+    // strange is happening before pointers and things are
     if(actTicksAllowed)
     {
         // Handle the update for each counter.
@@ -326,15 +326,14 @@ ActZero(
 
 //***_plat__ACT_Initialize()
 // This function initializes the ACT hardware and data structures
-LIB_EXPORT int 
+LIB_EXPORT int
 _plat__ACT_Initialize(
     void
 )
 {
     actTicksAllowed = 0;
-#define ZERO_ACT(N)  ActZero(0x##N, &ACT_##N); 
+#define ZERO_ACT(N)  ActZero(0x##N, &ACT_##N);
     FOR_EACH_ACT(ZERO_ACT)
 
     return TRUE;
 }
-

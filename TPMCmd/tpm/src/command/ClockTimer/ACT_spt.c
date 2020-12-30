@@ -75,8 +75,8 @@ ActStartup(
     // Reset all the ACT hardware
     _plat__ACT_Initialize();
 
-    // If this not a cold start, copy all the current 'signaled' settings to 
-    // 'preservedSignaled'. 
+    // If this not a cold start, copy all the current 'signaled' settings to
+    // 'preservedSignaled'.
     if (g_powerWasLost)
         go.preservedSignaled = 0;
     else
@@ -116,7 +116,7 @@ _ActSaveState(
 )
 {
     actData->remaining = _plat__ACT_GetRemaining(act);
-    // If the ACT hasn't been updated since the last startup, then it should be 
+    // If the ACT hasn't been updated since the last startup, then it should be
     // be halved.
     if((s_ActUpdated & (1 << act)) == 0)
     {
@@ -208,7 +208,7 @@ ActCounterUpdate(
         // not available
         if(NV_IS_ORDERLY)
             RETURN_IF_NV_IS_NOT_AVAILABLE;
-        // if the attempt to update the counter fails, it means that there is an 
+        // if the attempt to update the counter fails, it means that there is an
         // update pending so wait until it has occurred and then do an update.
         if(!_plat__ACT_UpdateCounter(act, newValue))
             result = TPM_RC_RETRY;
@@ -249,7 +249,7 @@ ActGetCapabilityData(
     if((actHandle < TPM_RH_ACT_0) || (actHandle > TPM_RH_ACT_F))
         return FALSE;
     // The maximum count of curves we may return is MAX_ECC_CURVES
-    if(maxCount > MAX_ACT_DATA) 
+    if(maxCount > MAX_ACT_DATA)
         maxCount = MAX_ACT_DATA;
     // Scan the ACT data from the starting ACT
     for(; actHandle <= TPM_RH_ACT_F; actHandle++)
@@ -276,13 +276,10 @@ ActGetCapabilityData(
         else
         {
             if(_plat__ACT_GetImplemented(act))
-                return YES; 
+                return YES;
         }
     }
     // If we get here, either all of the ACT values were put in the list, or the list
     // was filled and there are no more ACT values to return
     return NO;
 }
-
-
-

@@ -67,7 +67,7 @@ TPM2_NV_Write(
 // Input Validation
 
     // Common access checks, NvWriteAccessCheck() may return TPM_RC_NV_AUTHORIZATION
-    // or TPM_RC_NV_LOCKED 
+    // or TPM_RC_NV_LOCKED
     result = NvWriteAccessChecks(in->authHandle,
                                  in->nvIndex,
                                  attributes);
@@ -94,7 +94,7 @@ TPM2_NV_Write(
     // Note: if the requested size is the same as the Index data size, then offset
     // will have to be zero. Otherwise, the range check above would have failed.
     if(IS_ATTRIBUTE(attributes, TPMA_NV, WRITEALL)
-       && in->data.t.size < nvIndex->publicArea.dataSize)   
+       && in->data.t.size < nvIndex->publicArea.dataSize)
         return TPM_RC_NV_RANGE;
 
 // Internal Data Update

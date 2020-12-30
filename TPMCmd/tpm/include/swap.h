@@ -51,7 +51,7 @@
 #define FROM_BIG_ENDIAN_UINT64(i)   (i)
 #endif
 
-#if   AUTO_ALIGN == NO 
+#if   AUTO_ALIGN == NO
 
 // The aggregation macros for machines that do not allow unaligned access or for
 // little-endian machines.

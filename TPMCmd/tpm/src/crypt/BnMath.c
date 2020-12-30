@@ -134,7 +134,7 @@ CarryResolve(
 }
 
 //*** BnAdd()
-// This function adds two bigNum values. This function always returns TRUE. 
+// This function adds two bigNum values. This function always returns TRUE.
 LIB_EXPORT BOOL
 BnAdd(
     bigNum           result,
@@ -223,8 +223,8 @@ BorrowProp(
 }
 
 //*** BnSub()
-// This function does subtraction of two bigNum values and returns result = op1 - op2 
-// when op1 is greater than op2. If op2 is greater than op1, then a fault is 
+// This function does subtraction of two bigNum values and returns result = op1 - op2
+// when op1 is greater than op2. If op2 is greater than op1, then a fault is
 // generated. This function always returns TRUE.
 LIB_EXPORT BOOL
 BnSub(
@@ -248,7 +248,7 @@ BnSub(
 }
 
 //*** BnSubWord()
-// This function subtracts a word value from a bigNum. This function always 
+// This function subtracts a word value from a bigNum. This function always
 // returns TRUE.
 LIB_EXPORT BOOL
 BnSubWord(
@@ -341,7 +341,7 @@ BnModWord(
 }
 
 //*** Msb()
-// This function returns the bit number of the most significant bit of a 
+// This function returns the bit number of the most significant bit of a
 // crypt_uword_t. The number for the least significant bit of any bigNum value is 0.
 // The maximum return value is RADIX_BITS - 1,
 //  Return Type: int
@@ -366,7 +366,7 @@ Msb(
 }
 
 //*** BnMsb()
-// This function returns the number of the MSb of a bigNum value. 
+// This function returns the number of the MSb of a bigNum value.
 //  Return Type: int
 //      -1              the word was zero or 'bn' was NULL
 //      n               the bit number of the most significant bit in the word
@@ -387,7 +387,7 @@ BnMsb(
 }
 
 //*** BnSizeInBits()
-// This function returns the number of bits required to hold a number. It is one 
+// This function returns the number of bits required to hold a number. It is one
 // greater than the Msb.
 //
 LIB_EXPORT unsigned
@@ -418,7 +418,7 @@ BnSetWord(
 }
 
 //*** BnSetBit()
-// This function will SET a bit in a bigNum. Bit 0 is the least-significant bit in 
+// This function will SET a bit in a bigNum. Bit 0 is the least-significant bit in
 // the 0th digit_t. The function always return TRUE
 LIB_EXPORT BOOL
 BnSetBit(
@@ -436,7 +436,7 @@ BnSetBit(
 }
 
 //*** BnTestBit()
-// This function is used to check to see if a bit is SET in a bignum_t. The 0th bit 
+// This function is used to check to see if a bit is SET in a bignum_t. The 0th bit
 // is the LSb of d[0].
 //  Return Type: BOOL
 //      TRUE(1)         the bit is set
@@ -485,7 +485,7 @@ BnMaskBits(
 }
 
 //*** BnShiftRight()
-// This function will shift a bigNum to the right by the shiftAmount. 
+// This function will shift a bigNum to the right by the shiftAmount.
 // This function always returns TRUE.
 LIB_EXPORT BOOL
 BnShiftRight(
@@ -534,7 +534,7 @@ BnShiftRight(
 //
 // One consequence of the generation scheme is that, if the number of bits requested
 // is not a multiple of 8, then the high-order bits are set to zero. This would come
-// into play when generating a 521-bit ECC key. A 66-byte (528-bit) value is 
+// into play when generating a 521-bit ECC key. A 66-byte (528-bit) value is
 // generated an the high order 7 bits are masked off (CLEAR).
 //  Return Type: BOOL
 //      TRUE(1)         success
@@ -564,7 +564,7 @@ BnGetRandomBits(
 }
 
 //*** BnGenerateRandomInRange()
-// This function is used to generate a random number r in the range 1 <= r < limit. 
+// This function is used to generate a random number r in the range 1 <= r < limit.
 // The function gets a random number of bits that is the size of limit. There is some
 // some probability that the returned number is going to be greater than or equal
 // to the limit. If it is, try again. There is no more than 50% chance that the

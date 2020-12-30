@@ -77,7 +77,7 @@
 //** Links to the OpenSSL HASH code
 //***************************************************************
 
-// Redefine the internal name used for each of the hash state structures to the 
+// Redefine the internal name used for each of the hash state structures to the
 // name used by the library.
 // These defines need to be known in all parts of the TPM so that the structure
 // sizes can be properly computed when needed.
@@ -87,9 +87,9 @@
 #define tpmHashStateSHA512_t      SHA512_CTX
 #define tpmHashStateSM3_256_t     SM3_CTX
 
-// The defines below are only needed when compiling CryptHash.c or CryptSmac.c. 
-// This isolation is primarily to avoid name space collision. However, if there 
-// is a real collision, it will likely show up when the linker tries to put things 
+// The defines below are only needed when compiling CryptHash.c or CryptSmac.c.
+// This isolation is primarily to avoid name space collision. However, if there
+// is a real collision, it will likely show up when the linker tries to put things
 // together.
 
 #ifdef _CRYPT_HASH_C_
@@ -97,17 +97,17 @@
 typedef BYTE          *PBYTE;
 typedef const BYTE    *PCBYTE;
 
-// Define the interface between CryptHash.c to the functions provided by the 
-// library. For each method, define the calling parameters of the method and then 
+// Define the interface between CryptHash.c to the functions provided by the
+// library. For each method, define the calling parameters of the method and then
 // define how the method is invoked in CryptHash.c.
 //
 // All hashes are required to have the same calling sequence. If they don't, create
 // a simple adaptation function that converts from the "standard" form of the call
 // to the form used by the specific hash (and then send a nasty letter to the
-// person who wrote the hash function for the library). 
-// 
+// person who wrote the hash function for the library).
+//
 // The macro that calls the method also defines how the
-// parameters get swizzled between the default form (in CryptHash.c)and the 
+// parameters get swizzled between the default form (in CryptHash.c)and the
 // library form.
 //
 // Initialize the hash context
@@ -141,7 +141,7 @@ typedef const BYTE    *PCBYTE;
                                               &(hashStateIn)->state,            \
                                               (hashStateIn)->def->contextSize)
 
-// Copy (with reformatting when necessary) an internal hash structure to an 
+// Copy (with reformatting when necessary) an internal hash structure to an
 // external blob
 #define  HASH_STATE_EXPORT_METHOD_DEF                                           \
                 void (HASH_STATE_EXPORT_METHOD)(BYTE *to,                       \
@@ -153,7 +153,7 @@ typedef const BYTE    *PCBYTE;
                          &(hashStateFrom)->state,                               \
                          (hashStateFrom)->def->contextSize)
 
-// Copy from an external blob to an internal formate (with reformatting when 
+// Copy from an external blob to an internal formate (with reformatting when
 // necessary
 #define  HASH_STATE_IMPORT_METHOD_DEF                                           \
                 void (HASH_STATE_IMPORT_METHOD)(PANY_HASH_STATE to,             \
@@ -168,37 +168,37 @@ typedef const BYTE    *PCBYTE;
 
 // Function aliases. The code in CryptHash.c uses the internal designation for the
 // functions. These need to be translated to the function names of the library.
-#define tpmHashStart_SHA1           SHA1_Init   // external name of the 
+#define tpmHashStart_SHA1           SHA1_Init   // external name of the
                                                 // initialization method
 #define tpmHashData_SHA1            SHA1_Update
-#define tpmHashEnd_SHA1             SHA1_Final  
-#define tpmHashStateCopy_SHA1       memcpy 
-#define tpmHashStateExport_SHA1     memcpy 
-#define tpmHashStateImport_SHA1     memcpy 
+#define tpmHashEnd_SHA1             SHA1_Final
+#define tpmHashStateCopy_SHA1       memcpy
+#define tpmHashStateExport_SHA1     memcpy
+#define tpmHashStateImport_SHA1     memcpy
 #define tpmHashStart_SHA256         SHA256_Init
 #define tpmHashData_SHA256          SHA256_Update
 #define tpmHashEnd_SHA256           SHA256_Final
 #define tpmHashStateCopy_SHA256     memcpy
-#define tpmHashStateExport_SHA256   memcpy 
-#define tpmHashStateImport_SHA256   memcpy 
+#define tpmHashStateExport_SHA256   memcpy
+#define tpmHashStateImport_SHA256   memcpy
 #define tpmHashStart_SHA384         SHA384_Init
 #define tpmHashData_SHA384          SHA384_Update
 #define tpmHashEnd_SHA384           SHA384_Final
-#define tpmHashStateCopy_SHA384     memcpy 
-#define tpmHashStateExport_SHA384   memcpy 
-#define tpmHashStateImport_SHA384   memcpy 
+#define tpmHashStateCopy_SHA384     memcpy
+#define tpmHashStateExport_SHA384   memcpy
+#define tpmHashStateImport_SHA384   memcpy
 #define tpmHashStart_SHA512         SHA512_Init
 #define tpmHashData_SHA512          SHA512_Update
 #define tpmHashEnd_SHA512           SHA512_Final
-#define tpmHashStateCopy_SHA512     memcpy 
-#define tpmHashStateExport_SHA512   memcpy 
-#define tpmHashStateImport_SHA_512  memcpy 
+#define tpmHashStateCopy_SHA512     memcpy
+#define tpmHashStateExport_SHA512   memcpy
+#define tpmHashStateImport_SHA_512  memcpy
 #define tpmHashStart_SM3_256        sm3_init
 #define tpmHashData_SM3_256         sm3_update
 #define tpmHashEnd_SM3_256          sm3_final
-#define tpmHashStateCopy_SM3_256    memcpy 
-#define tpmHashStateExport_SM3_256  memcpy 
-#define tpmHashStateImport_SM3_256  memcpy 
+#define tpmHashStateCopy_SM3_256    memcpy
+#define tpmHashStateExport_SM3_256  memcpy
+#define tpmHashStateImport_SM3_256  memcpy
 
 #endif // _CRYPT_HASH_C_
 

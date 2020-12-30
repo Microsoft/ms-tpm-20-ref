@@ -50,16 +50,16 @@ COUNT = 0
 EntropyInput = 0d15aa80 b16c3a10 906cfedb 795dae0b 5b81041c 5c5bfacb
                373d4440 d9120f7e 3d6cf909 86cf52d8 5d3e947d 8c061f91
 Nonce = 06caef5f b538e08e 1f3b0452 03f8f4b2
-PersonalizationString = 
-AdditionalInput = 
-    INTERMEDIATE Key = be5df629 34cc1230 166a6773 345bbd6b 
+PersonalizationString =
+AdditionalInput =
+    INTERMEDIATE Key = be5df629 34cc1230 166a6773 345bbd6b
                        4c8869cf 8aec1c3b 1aa98bca 37cacf61
     INTERMEDIATE V = 3182dd1e 7638ec70 014e93bd 813e524c
     INTERMEDIATE ReturnedBits = 28e0ebb8 21016650 8c8f65f2 207bd0a3
-EntropyInputReseed = 6ee793a3 3955d72a d12fd80a 8a3fcf95 ed3b4dac 5795fe25 
+EntropyInputReseed = 6ee793a3 3955d72a d12fd80a 8a3fcf95 ed3b4dac 5795fe25
                      cf869f7c 27573bbc 56f1acae 13a65042 b340093c 464a7a22
-AdditionalInputReseed = 
-AdditionalInput = 
+AdditionalInputReseed =
+AdditionalInput =
 ReturnedBits = 946f5182 d54510b9 461248f5 71ca06c9
 */
 
@@ -102,15 +102,15 @@ ReturnedBits = 946f5182 d54510b9 461248f5 71ca06c9
 COUNT = 0
 EntropyInput = 8fc11bdb5aabb7e093b61428e0907303cb459f3b600dad870955f22da80a44f8
 Nonce = be1f73885ddd15aa
-PersonalizationString = 
-AdditionalInput = 
+PersonalizationString =
+AdditionalInput =
     INTERMEDIATE Key = b134ecc836df6dbd624900af118dd7e6
     INTERMEDIATE V = 01bb09e86dabd75c9f26dbf6f9531368
     INTERMEDIATE ReturnedBits = dc3cf6bf5bd341135f2c6811a1071c87
-EntropyInputReseed = 
+EntropyInputReseed =
                  0cd53cd5eccd5a10d7ea266111259b05574fc6ddd8bed8bd72378cf82f1dba2a
-AdditionalInputReseed = 
-AdditionalInput = 
+AdditionalInputReseed =
+AdditionalInput =
 ReturnedBits = b61850decfd7106d44769a8e6e8c1ad4
 */
 
@@ -119,20 +119,20 @@ ReturnedBits = b61850decfd7106d44769a8e6e8c1ad4
         0x93, 0xb6, 0x14, 0x28, 0xe0, 0x90, 0x73, 0x03, \
         0xcb, 0x45, 0x9f, 0x3b, 0x60, 0x0d, 0xad, 0x87, \
         0x09, 0x55, 0xf2, 0x2d, 0xa8, 0x0a, 0x44, 0xf8
-        
+
 #   define DRBG_TEST_RESEED_ENTROPY                     \
         0x0c, 0xd5, 0x3c, 0xd5, 0xec, 0xcd, 0x5a, 0x10, \
         0xd7, 0xea, 0x26, 0x61, 0x11, 0x25, 0x9b, 0x05, \
         0x57, 0x4f, 0xc6, 0xdd, 0xd8, 0xbe, 0xd8, 0xbd, \
-        0x72, 0x37, 0x8c, 0xf8, 0x2f, 0x1d, 0xba, 0x2a  
-        
+        0x72, 0x37, 0x8c, 0xf8, 0x2f, 0x1d, 0xba, 0x2a
+
 #define DRBG_TEST_GENERATED_INTERM                      \
         0xdc, 0x3c, 0xf6, 0xbf, 0x5b, 0xd3, 0x41, 0x13, \
-        0x5f, 0x2c, 0x68, 0x11, 0xa1, 0x07, 0x1c, 0x87  
+        0x5f, 0x2c, 0x68, 0x11, 0xa1, 0x07, 0x1c, 0x87
 
 #   define DRBG_TEST_GENERATED                          \
         0xb6, 0x18, 0x50, 0xde, 0xcf, 0xd7, 0x10, 0x6d, \
-        0x44, 0x76, 0x9a, 0x8e, 0x6e, 0x8c, 0x1a, 0xd4 
+        0x44, 0x76, 0x9a, 0x8e, 0x6e, 0x8c, 0x1a, 0xd4
 
 #endif
 

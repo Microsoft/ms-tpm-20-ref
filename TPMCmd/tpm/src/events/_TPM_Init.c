@@ -53,7 +53,7 @@ _TPM_Init(
         memset(&gp, 0xbb, sizeof(gp));
         memset(&go, 0xbb, sizeof(go));
     }
-#endif   
+#endif
 
 #if SIMULATION
     // Clear the flag that forces failure on self-test
@@ -74,7 +74,7 @@ _TPM_Init(
 
     // Initialize the NvEnvironment.
     g_nvOk = NvPowerOn();
-    
+
     // Initialize cryptographic functions
     g_inFailureMode = (CryptInit() == FALSE);
     if(!g_inFailureMode)

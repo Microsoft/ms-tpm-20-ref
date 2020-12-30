@@ -41,12 +41,12 @@
 // wolfcrypt format. To call the wolfcrypt function, a mp_int structure is created
 // for each passed variable. We define USE_FAST_MATH wolfcrypt option, which allocates
 // mp_int on the stack. We must copy each word to the new structure, and set the used
-// size. 
+// size.
 //
 // Not using USE_FAST_MATH would allow for a simple pointer swap for the big integer
 // buffer 'd', however wolfcrypt expects to manage this memory, and will swap out
 // the pointer to and from temporary variables and free the reference underneath us.
-// Using USE_FAST_MATH also instructs wolfcrypt to use the stack for all these 
+// Using USE_FAST_MATH also instructs wolfcrypt to use the stack for all these
 // intermediate variables
 
 
@@ -149,15 +149,15 @@ MpInitialize(
 // that is being referenced is using the same size of data structures as the TPM.
 BOOL
 MathLibraryCompatibilityCheck(
-    void 
+    void
     )
 {
     BN_VAR(tpmTemp, 64 * 8); // allocate some space for a test value
     crypt_uword_t           i;
     TPM2B_TYPE(TEST, 16);
-    TPM2B_TEST              test = {{16, {0x0F, 0x0E, 0x0D, 0x0C, 
-                                          0x0B, 0x0A, 0x09, 0x08, 
-                                          0x07, 0x06, 0x05, 0x04, 
+    TPM2B_TEST              test = {{16, {0x0F, 0x0E, 0x0D, 0x0C,
+                                          0x0B, 0x0A, 0x09, 0x08,
+                                          0x07, 0x06, 0x05, 0x04,
                                           0x03, 0x02, 0x01, 0x00}}};
     // Convert the test TPM2B to a bigNum
     BnFrom2B(tpmTemp, &test.b);
@@ -261,7 +261,7 @@ BnDiv(
     else
     {
         pAssert((quotient == NULL)
-                || (quotient->allocated >= (unsigned)(dividend->size 
+                || (quotient->allocated >= (unsigned)(dividend->size
                                                       - divisor->size)));
         pAssert((remainder == NULL)
                 || (remainder->allocated >= divisor->size));

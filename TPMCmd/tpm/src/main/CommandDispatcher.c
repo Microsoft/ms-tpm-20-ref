@@ -344,7 +344,7 @@ Exit:
         {
             marshalIndex_t      index = unmarshalArray[dType];
             index |= (type & 0x80) ? NULL_FLAG : 0;
-            result = Unmarshal(index, &commandIn[offset], &command->parameterBuffer, 
+            result = Unmarshal(index, &commandIn[offset], &command->parameterBuffer,
                                &command->parameterSize);
         }
 #else
@@ -431,18 +431,18 @@ Exit:
     // no pointers to data, all of the data being returned has to be in the
     // command action output buffer. If we try to marshal more bytes than
     // could fit into the output buffer, we need to fail.
-    for(;(dType = (type & 0x7F)) <= RESPONSE_PARAMETER_LAST_TYPE 
+    for(;(dType = (type & 0x7F)) <= RESPONSE_PARAMETER_LAST_TYPE
         && !g_inFailureMode; type = *types++)
     {
 #if TABLE_DRIVEN_MARSHAL
         marshalIndex_t      index = marshalArray[dType];
-        command->parameterSize += Marshal(index, &commandOut[offset], 
+        command->parameterSize += Marshal(index, &commandOut[offset],
                                           &command->responseBuffer,
                                           &maxOutSize);
 #else
         const MARSHAL_t     f = marshalArray[dType];
 
-        command->parameterSize += f(&commandOut[offset], 
+        command->parameterSize += f(&commandOut[offset],
                                     &command->responseBuffer,
                                     &maxOutSize);
 #endif

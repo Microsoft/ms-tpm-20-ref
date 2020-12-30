@@ -178,7 +178,7 @@ CryptInitializeToTest(
     // Setting the algorithm to null causes the test function to just clear
     // out any algorithms for which there is no test.
     CryptTestAlgorithm(TPM_ALG_ERROR, &g_toTest);
-    
+
     return;
 }
 

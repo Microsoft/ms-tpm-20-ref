@@ -83,7 +83,7 @@ TPM2_PolicyCounterTimer(
         // The time and clock vales are the first two 64-bit values in the clock
         if(in->offset < sizeof(UINT64) + sizeof(UINT64))
         {
-            // Using Clock or Time so see if clock is running. Clock doesn't 
+            // Using Clock or Time so see if clock is running. Clock doesn't
             // run while NV is unavailable.
             // TPM_RC_NV_UNAVAILABLE or TPM_RC_NV_RATE error may be returned here.
             RETURN_IF_NV_IS_NOT_AVAILABLE;

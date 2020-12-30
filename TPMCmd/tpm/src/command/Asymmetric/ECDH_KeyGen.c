@@ -73,7 +73,7 @@ TPM2_ECDH_KeyGen(
             // Compute Z
             result = CryptEccPointMultiply(&out->zPoint.point,
                                            keyPublic->parameters.eccDetail.curveID,
-                                           &keyPublic->unique.ecc, 
+                                           &keyPublic->unique.ecc,
                                            &sensitive,
                                            NULL, NULL);
                     // The point in the key is not on the curve. Indicate

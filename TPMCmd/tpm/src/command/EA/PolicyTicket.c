@@ -76,7 +76,7 @@ TPM2_PolicyTicket(
         return TPM_RCS_ATTRIBUTES + RC_PolicyTicket_policySession;
     // Restore timeout data.  The format of timeout buffer is TPM-specific.
     // In this implementation, the most significant bit of the timeout value is
-    // used as the flag to indicate that the ticket expires on TPM Reset or 
+    // used as the flag to indicate that the ticket expires on TPM Reset or
     // TPM Restart. The flag has to be removed before the parameters and ticket
     // are checked.
     if(in->timeout.t.size != sizeof(UINT64))
@@ -89,7 +89,7 @@ TPM2_PolicyTicket(
 
     // Do the normal checks on the cpHashA and timeout values
     result = PolicyParameterChecks(session, authTimeout,
-                                   &in->cpHashA, 
+                                   &in->cpHashA,
                                    NULL,                    // no nonce
                                    0,                       // no bad nonce return
                                    RC_PolicyTicket_cpHashA,
@@ -98,8 +98,8 @@ TPM2_PolicyTicket(
         return result;
     // Validate Ticket
     // Re-generate policy ticket by input parameters
-    TicketComputeAuth(in->ticket.tag, in->ticket.hierarchy, 
-                      authTimeout, expiresOnReset, &in->cpHashA, &in->policyRef, 
+    TicketComputeAuth(in->ticket.tag, in->ticket.hierarchy,
+                      authTimeout, expiresOnReset, &in->cpHashA, &in->policyRef,
                       &in->authName, &ticketToCompare);
     // Compare generated digest with input ticket digest
     if(!MemoryEqual2B(&in->ticket.digest.b, &ticketToCompare.digest.b))

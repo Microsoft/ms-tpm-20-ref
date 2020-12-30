@@ -40,7 +40,7 @@
 // This file should only be included by CommandCodeAttibutes.c
 #ifdef _COMMAND_TABLE_DISPATCH_
 
-   
+
 // Define the stop value
 #define END_OF_LIST     0xff
 #define ADD_FLAG        0x80
@@ -51,7 +51,7 @@
 #   define UNMARSHAL_DISPATCH(name)   (marshalIndex_t)name##_MARSHAL_REF
 #   define MARSHAL_DISPATCH(name)     (marshalIndex_t)name##_MARSHAL_REF
 #   define _UNMARSHAL_T_    marshalIndex_t
-#   define _MARSHAL_T_      marshalIndex_t    
+#   define _MARSHAL_T_      marshalIndex_t
 #else
 #   define UNMARSHAL_DISPATCH(name)   (UNMARSHAL_t)name##_Unmarshal
 #   define MARSHAL_DISPATCH(name)     (MARSHAL_t)name##_Marshal
@@ -240,7 +240,7 @@ const _UNMARSHAL_T_ unmarshalArray[] = {
 // PARAMETER_LAST_TYPE is the end of the command parameter list.
 #define PARAMETER_LAST_TYPE                     (TPMT_SYM_DEF_OBJECT_P_UNMARSHAL)
 };
-   
+
 // The marshalArray contains the dispatch functions for the marshaling code.
 // The defines in this array are used to make it easier to cross reference the
 // marshaling values in the types array of each command

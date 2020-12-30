@@ -56,7 +56,7 @@
 #   endif
 #endif // RADIX_BITS
 
-// These macros use the selected libraries to the proper include files. 
+// These macros use the selected libraries to the proper include files.
 #define LIB_QUOTE(_STRING_) #_STRING_
 #define LIB_INCLUDE2(_LIB_, _TYPE_) LIB_QUOTE(_LIB_/TpmTo##_LIB_##_TYPE_.h)
 #define LIB_INCLUDE(_LIB_, _TYPE_) LIB_INCLUDE2(_LIB_, _TYPE_)

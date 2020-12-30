@@ -33,23 +33,23 @@
  *  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 //** Description
-// This file will instance the TPM variables that are not stack allocated. 
+// This file will instance the TPM variables that are not stack allocated.
 
 // Descriptions of global variables are in Global.h. There macro macro definitions
 // that allows a variable to be instanced or simply defined as an external variable.
-// When global.h is included from this .c file, GLOBAL_C is defined and values are 
-// instanced (and possibly initialized), but when global.h is included by any other 
-// file, they are simply defined as external values. DO NOT DEFINE GLOBAL_C IN ANY 
+// When global.h is included from this .c file, GLOBAL_C is defined and values are
+// instanced (and possibly initialized), but when global.h is included by any other
+// file, they are simply defined as external values. DO NOT DEFINE GLOBAL_C IN ANY
 // OTHER FILE.
 //
 // NOTE: This is a change from previous implementations where Global.h just contained
-// the extern declaration and values were instanced in this file. This change keeps 
+// the extern declaration and values were instanced in this file. This change keeps
 // the definition and instance in one file making maintenance easier. The instanced
 // data will still be in the global.obj file.
 //
 // The OIDs.h file works in a way that is similar to the Global.h with the definition
-// of the values in OIDs.h such that they are instanced in global.obj. The macros 
-// that are defined in Global.h are used in OIDs.h in the same way as they are in 
+// of the values in OIDs.h such that they are instanced in global.obj. The macros
+// that are defined in Global.h are used in OIDs.h in the same way as they are in
 // Global.h.
 
 //** Defines and Includes
@@ -60,4 +60,3 @@
 #if CC_CertifyX509
 #   include "X509.h"
 #endif // CC_CertifyX509
-

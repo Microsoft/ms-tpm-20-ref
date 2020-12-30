@@ -50,8 +50,8 @@
 // If the key is two key (16 bytes), then the first DES key is replicated to the third
 // key position.
 int TDES_setup(
-    const BYTE          *key, 
-    UINT32               keyBits, 
+    const BYTE          *key,
+    UINT32               keyBits,
     tpmKeyScheduleTDES       *skey,
     int dir
     )
@@ -96,7 +96,7 @@ int TDES_setup_decrypt_key(
 
 //*** TDES_encyrpt()
 void TDES_encrypt(
-    const BYTE              *in, 
+    const BYTE              *in,
     BYTE                    *out,
     tpmKeyScheduleTDES      *ks
     )

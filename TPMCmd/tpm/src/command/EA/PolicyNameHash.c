@@ -66,8 +66,8 @@ TPM2_PolicyNameHash(
 
     // u1 in the policy session context cannot otherwise be occupied
     if(session->u1.cpHash.b.size != 0
-       || session->attributes.isBound 
-       || session->attributes.isCpHashDefined 
+       || session->attributes.isBound
+       || session->attributes.isCpHashDefined
        || session->attributes.isTemplateSet)
         return TPM_RC_CPHASH;
 

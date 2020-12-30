@@ -101,7 +101,7 @@ TPM2_ZGen_2Phase(
 
 // Command Output
 
-    result = 
+    result =
         CryptEcc2PhaseKeyExchange(&out->outZ1.point,
                                   &out->outZ2.point,
                                   eccKey->publicArea.parameters.eccDetail.curveID,

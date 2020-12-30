@@ -874,7 +874,7 @@ TestAlgorithm(
 // Have to use two arguments for the macro even though only the first is used in the
 // expansion.
 #define HASH_CASE_TEST(HASH, hash)                                                   \
-            case ALG_##HASH##_VALUE:			
+            case ALG_##HASH##_VALUE:
                 FOR_EACH_HASH(HASH_CASE_TEST)
 #undef HASH_CASE_TEST
                 if(doTest)

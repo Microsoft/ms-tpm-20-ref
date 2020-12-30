@@ -95,7 +95,7 @@ TPM2_Duplicate(
 
     // If the duplicated object has encryptedDuplication SET, then there must be
     // an inner wrapper and the new parent may not be TPM_RH_NULL
-    if(IS_ATTRIBUTE(object->publicArea.objectAttributes, TPMA_OBJECT, 
+    if(IS_ATTRIBUTE(object->publicArea.objectAttributes, TPMA_OBJECT,
                     encryptedDuplication))
     {
         if(in->symmetricAlg.algorithm == TPM_ALG_NULL)

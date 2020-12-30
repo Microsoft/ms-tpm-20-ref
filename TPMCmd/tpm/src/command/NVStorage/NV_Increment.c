@@ -57,7 +57,7 @@ TPM2_NV_Increment(
 // Input Validation
 
     // Common access checks, NvWriteAccessCheck() may return TPM_RC_NV_AUTHORIZATION
-    // or TPM_RC_NV_LOCKED 
+    // or TPM_RC_NV_LOCKED
     result = NvWriteAccessChecks(in->authHandle,
                                  in->nvIndex,
                                  nvIndex->publicArea.attributes);
@@ -71,7 +71,7 @@ TPM2_NV_Increment(
 // Internal Data Update
 
     // If counter index is not been written, initialize it
-    if(!IS_ATTRIBUTE(nvIndex->publicArea.attributes, TPMA_NV, WRITTEN))  
+    if(!IS_ATTRIBUTE(nvIndex->publicArea.attributes, TPMA_NV, WRITTEN))
         countValue = NvReadMaxCount();
     else
         // Read NV data in native format for TPM CPU.
@@ -87,9 +87,9 @@ TPM2_NV_Increment(
     if(result == TPM_RC_SUCCESS)
     {
         // If a counter just rolled over, then force the NV update.
-        // Note, if this is an orderly counter, then the write-back needs to be 
+        // Note, if this is an orderly counter, then the write-back needs to be
         // forced, for other counters, the write-back will happen anyway
-        if(IS_ATTRIBUTE(nvIndex->publicArea.attributes, TPMA_NV, ORDERLY)    
+        if(IS_ATTRIBUTE(nvIndex->publicArea.attributes, TPMA_NV, ORDERLY)
            && (countValue & MAX_ORDERLY_COUNT) == 0 )
         {
             // Need to force an NV update of orderly data

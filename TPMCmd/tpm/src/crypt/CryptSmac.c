@@ -35,7 +35,7 @@
 //** Introduction
 //
 // This file contains the implementation of the message authentication codes based
-// on a symmetric block cipher. These functions only use the single block 
+// on a symmetric block cipher. These functions only use the single block
 // encryption functions of the selected symmetric cryptographic library.
 
 //** Includes, Defines, and Typedefs
@@ -64,7 +64,7 @@ CryptSmacStart(
         {
 #if ALG_CMAC
             case TPM_ALG_CMAC:
-                retVal = CryptCmacStart(&state->state.smac, keyParameters, 
+                retVal = CryptCmacStart(&state->state.smac, keyParameters,
                                         macAlg, key);
                 break;
 #endif

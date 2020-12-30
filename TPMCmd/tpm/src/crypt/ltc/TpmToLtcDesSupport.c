@@ -47,12 +47,12 @@
 
 //** TDES_setup
 // This function calls the LTC function to generate a TDES key schedule. If the
-// key is one DES key (8 bytes), then it is replicated two more times to create a 
+// key is one DES key (8 bytes), then it is replicated two more times to create a
 // 24-byte TDES key. If the key is two key (16 bytes), then the first DES key is
 // replicated to the third key position.
 void TDES_setup(
-    const BYTE          *key, 
-    UINT32               keyBits, 
+    const BYTE          *key,
+    UINT32               keyBits,
     symmetric_key       *skey
     )
 {

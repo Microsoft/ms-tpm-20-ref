@@ -327,4 +327,3 @@ _rpc__ACT_GetSignaled(
         return _plat__ACT_GetSignaled(actHandle - TPM_RH_ACT_0);
     return false;
 }
-

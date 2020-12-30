@@ -43,7 +43,7 @@
 // Was typing this a lot
 #define SELF_TEST_FAILURE   FAIL(FATAL_ERROR_SELF_TEST)
 
-// Use the definition of key sizes to set algorithm values for key size. 
+// Use the definition of key sizes to set algorithm values for key size.
 #define AES_ENTRIES (AES_128 + AES_192 + AES_256)
 #define SM4_ENTRIES (SM4_128)
 #define CAMELLIA_ENTRIES (CAMELLIA_128 + CAMELLIA_192 + CAMELLIA_256)

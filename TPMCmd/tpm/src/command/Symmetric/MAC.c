@@ -78,8 +78,8 @@ TPM2_MAC(
     if(!IS_ATTRIBUTE(publicArea->objectAttributes, TPMA_OBJECT, sign))
         return TPM_RCS_KEY + RC_MAC_handle;
 // Command Output
-    out->outMAC.t.size = CryptMacStart(&state, &publicArea->parameters, 
-                                       in->inScheme, 
+    out->outMAC.t.size = CryptMacStart(&state, &publicArea->parameters,
+                                       in->inScheme,
                                        &keyObject->sensitive.sensitive.any.b);
     // If the mac can't start, treat it as a fatal error
     if(out->outMAC.t.size == 0)

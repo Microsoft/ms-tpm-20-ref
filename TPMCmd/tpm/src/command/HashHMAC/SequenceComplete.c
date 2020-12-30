@@ -68,7 +68,7 @@ TPM2_SequenceComplete(
         CryptDigestUpdate2B(&hashObject->state.hashState[0], &in->buffer.b);
 
         // Complete hash
-        out->result.t.size = CryptHashEnd(&hashObject->state.hashState[0], 
+        out->result.t.size = CryptHashEnd(&hashObject->state.hashState[0],
                                          sizeof(out->result.t.buffer),
                                          out->result.t.buffer);
         // Check if the first block of the sequence has been received
@@ -112,7 +112,7 @@ TPM2_SequenceComplete(
                                           out->result.t.buffer);
 #else
         // Complete the MAC
-        out->result.t.size = CryptMacEnd(&hashObject->state.hmacState, 
+        out->result.t.size = CryptMacEnd(&hashObject->state.hmacState,
                                          sizeof(out->result.t.buffer),
                                          out->result.t.buffer);
 #endif

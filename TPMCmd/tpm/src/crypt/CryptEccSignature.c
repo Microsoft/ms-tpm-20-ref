@@ -58,7 +58,7 @@ EcdsaDigest(
         BnSetWord(bnD, 0);
     else
     {
-        BnFromBytes(bnD, digest->t.buffer, 
+        BnFromBytes(bnD, digest->t.buffer,
                     (NUMBYTES)MIN(digest->t.size, BITS_TO_BYTES(bitsInMax)));
         shift = BnSizeInBits(bnD) - bitsInMax;
         if(shift > 0)
@@ -69,7 +69,7 @@ EcdsaDigest(
 
 //*** BnSchnorrSign()
 // This contains the Schnorr signature computation. It is used by both ECDSA and
-// Schnorr signing. The result is computed as: ['s' = 'k' + 'r' * 'd' (mod 'n')] 
+// Schnorr signing. The result is computed as: ['s' = 'k' + 'r' * 'd' (mod 'n')]
 // where
 // 1) 's' is the signature
 // 2) 'k' is a random value
@@ -77,7 +77,7 @@ EcdsaDigest(
 // 4) 'd' is the private EC key
 // 5) 'n' is the order of the curve
 //  Return Type: TPM_RC
-//      TPM_RC_NO_RESULT        the result of the operation was zero or 'r' (mod 'n') 
+//      TPM_RC_NO_RESULT        the result of the operation was zero or 'r' (mod 'n')
 //                              is zero
 static TPM_RC
 BnSchnorrSign(
@@ -231,7 +231,7 @@ BnSignEcdaa(
         retVal = TPM_RC_VALUE;
     else
     {
-        // This allocation is here because 'r' doesn't have a value until 
+        // This allocation is here because 'r' doesn't have a value until
         // CrypGenerateR() is done.
         ECC_INITIALIZED(bnR, &r);
         do
@@ -261,11 +261,11 @@ BnSignEcdaa(
                                        AccessCurveData(E)->order);
             }
         } while(retVal == TPM_RC_NO_RESULT);
-        // Because the rule is that internal state is not modified if the command 
+        // Because the rule is that internal state is not modified if the command
         // fails, only end the commit if the command succeeds.
-        // NOTE that if the result of the Schnorr computation was zero 
+        // NOTE that if the result of the Schnorr computation was zero
         // it will probably not be worthwhile to run the same command again because
-        // the result will still be zero. This means that the Commit command will 
+        // the result will still be zero. This means that the Commit command will
         // need to be run again to get a new commit value for the signature.
         if(retVal == TPM_RC_SUCCESS)
             CryptEndCommit(scheme->details.ecdaa.count);
@@ -407,7 +407,7 @@ BnSignEcSm2(
                                         //     debug)
     )
 {
-    BN_MAX_INITIALIZED(bnE, digest);    // Don't know how big digest might be 
+    BN_MAX_INITIALIZED(bnE, digest);    // Don't know how big digest might be
     ECC_NUM(bnN);
     ECC_NUM(bnK);
     ECC_NUM(bnT);                       // temp
@@ -530,7 +530,7 @@ CryptEccSign(
             break;
 #if ALG_ECDAA
         case TPM_ALG_ECDAA:
-            retVal = BnSignEcdaa(&signature->signature.ecdaa.signatureR, bnS, E, 
+            retVal = BnSignEcdaa(&signature->signature.ecdaa.signatureR, bnS, E,
                                  bnD, digest, scheme, signKey, rand);
             bnR = NULL;
             break;
@@ -567,7 +567,7 @@ Exit:
 
 //********************* Signature Validation   ********************
 
-#if ALG_ECDSA 
+#if ALG_ECDSA
 
 //*** BnValidateSignatureEcdsa()
 // This function validates an ECDSA signature. rIn and sIn should have been checked
@@ -769,7 +769,7 @@ CryptEccValidateSignature(
     POINT_INITIALIZED(ecQ, &signKey->publicArea.unique.ecc);
     bigConst                 order;
     TPM_RC                   retVal;
-    
+
     if(E == NULL)
         ERROR_RETURN(TPM_RC_VALUE);
 
@@ -791,7 +791,7 @@ CryptEccValidateSignature(
             break;
     }
     // Can convert r and s after determining that the scheme is an ECC scheme. If
-    // this conversion doesn't work, it means that the unmarshaling code for 
+    // this conversion doesn't work, it means that the unmarshaling code for
     // an ECC signature is broken.
     BnFrom2B(bnR, &signature->signature.ecdsa.signatureR.b);
     BnFrom2B(bnS, &signature->signature.ecdsa.signatureS.b);
@@ -812,7 +812,7 @@ CryptEccValidateSignature(
 #if ALG_ECSCHNORR
         case TPM_ALG_ECSCHNORR:
             retVal = BnValidateSignatureEcSchnorr(bnR, bnS,
-                                                  signature->signature.any.hashAlg, 
+                                                  signature->signature.any.hashAlg,
                                                   E, ecQ, digest);
             break;
 #endif
@@ -837,7 +837,7 @@ Exit:
 // if they are not.
 //
 // It is a fatal error if 'r' is NULL. If 'B' is not NULL, then it is a
-// fatal error if 'd' is NULL or if 'K' and 'L' are both NULL. 
+// fatal error if 'd' is NULL or if 'K' and 'L' are both NULL.
 // If 'M' is not NULL, then it is a fatal error if 'E' is NULL.
 //
 //  Return Type: TPM_RC
@@ -857,7 +857,7 @@ CryptEccCommitCompute(
     TPM2B_ECC_PARAMETER     *r              // IN: the computed r value (required)
     )
 {
-    CURVE_INITIALIZED(curve, curveId);  // Normally initialize E as the curve, but 
+    CURVE_INITIALIZED(curve, curveId);  // Normally initialize E as the curve, but
                                         // E means something else in this function
     ECC_INITIALIZED(bnR, r);
     TPM_RC               retVal = TPM_RC_SUCCESS;
@@ -915,8 +915,8 @@ CryptEccCommitCompute(
         if((B != NULL) && _plat__IsCanceled())
             ERROR_RETURN(TPM_RC_CANCELED);
 
-        // If M provided, then pM will not be NULL and will compute E = [r]M. 
-        // However, if M was not provided, then pM will be NULL and E = [r]G 
+        // If M provided, then pM will not be NULL and will compute E = [r]M.
+        // However, if M was not provided, then pM will be NULL and E = [r]G
         // will be computed
         if((retVal = BnPointMult(pE, pM, bnR, NULL, NULL, curve)) != TPM_RC_SUCCESS)
             goto Exit;

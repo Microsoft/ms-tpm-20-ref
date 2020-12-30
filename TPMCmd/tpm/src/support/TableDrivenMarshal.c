@@ -416,7 +416,7 @@ Unmarshal(
             // a bits table is present, then the bit field is checked to see if the
             // indicated value is implemented. For example, if there is a table of
             // allowed RSA key sizes and the 2nd entry matches, then the 2nd bit in
-            // the bit field is checked to see if that allowed size is implemented 
+            // the bit field is checked to see if that allowed size is implemented
             // in this TPM.
             //  typedef const struct TableMarshal_mst
             //  {
@@ -633,7 +633,7 @@ Unmarshal(
                     marshalIndex_t  index = m2bst->dataIndex;
                 //
                     // If this type propigates a null (PROPIGATE_NULL), propigate it
-                    if ((m2bst->modifiers & PROPAGATE_NULL) 
+                    if ((m2bst->modifiers & PROPAGATE_NULL)
                         && (typeIndex & typeIndex))
                         index |= NULL_FLAG;
                     // The structure might not start two bytes after the start of the

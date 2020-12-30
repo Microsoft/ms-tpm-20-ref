@@ -35,7 +35,7 @@
 //**Introduction
 // This module provides the platform specific entry and fail processing. The
 // _plat__RunCommand() function is used to call to ExecuteCommand() in the TPM code.
-// This function does whatever processing is necessary to set up the platform 
+// This function does whatever processing is necessary to set up the platform
 // in anticipation of the call to the TPM including settup for error processing.
 //
 // The _plat__Fail() function is called when there is a failure in the TPM. The TPM
@@ -58,7 +58,7 @@ jmp_buf              s_jumpBuffer;
 //***_plat__RunCommand()
 // This version of RunCommand will set up a jum_buf and call ExecuteCommand(). If
 // the command executes without failing, it will return and RunCommand will return.
-// If there is a failure in the command, then _plat__Fail() is called and it will 
+// If there is a failure in the command, then _plat__Fail() is called and it will
 // longjump back to RunCommand which will call ExecuteCommand again. However, this
 // time, the TPM will be in failure mode so ExecuteCommand will simply build
 // a failure response and return.
@@ -73,7 +73,7 @@ _plat__RunCommand(
     setjmp(s_jumpBuffer);
     ExecuteCommand(requestSize, request, responseSize, response);
 }
-    
+
 
 //***_plat__Fail()
 // This is the platform depended failure exit for the TPM.

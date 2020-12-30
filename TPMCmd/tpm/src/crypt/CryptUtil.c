@@ -46,7 +46,7 @@
 //****************************************************************************/
 
 //*** CryptHmacSign()
-// Sign a digest using an HMAC key. This an HMAC of a digest, not an HMAC of a 
+// Sign a digest using an HMAC key. This an HMAC of a digest, not an HMAC of a
 // message.
 //  Return Type: TPM_RC
 //      TPM_RC_HASH         not a valid hash
@@ -84,20 +84,20 @@ CryptHMACVerifySignature(
     )
 {
     TPMT_SIGNATURE           test;
-    TPMT_KEYEDHASH_SCHEME   *keyScheme = 
+    TPMT_KEYEDHASH_SCHEME   *keyScheme =
                          &signKey->publicArea.parameters.keyedHashDetail.scheme;
 //
     if((signature->sigAlg != TPM_ALG_HMAC)
        || (signature->signature.hmac.hashAlg == TPM_ALG_NULL))
         return TPM_RC_SCHEME;
     // This check is not really needed for verification purposes. However, it does
-    // prevent someone from trying to validate a signature using a weaker hash 
+    // prevent someone from trying to validate a signature using a weaker hash
     // algorithm than otherwise allowed by the key. That is, a key with a scheme
     // other than TMP_ALG_NULL can only be used to validate signatures that have
     // a matching scheme.
     if((keyScheme->scheme != TPM_ALG_NULL)
        && ((keyScheme->scheme != signature->sigAlg)
-           || (keyScheme->details.hmac.hashAlg 
+           || (keyScheme->details.hmac.hashAlg
                != signature->signature.any.hashAlg)))
         return TPM_RC_SIGNATURE;
     test.sigAlg = signature->sigAlg;
@@ -302,7 +302,7 @@ ParmEncryptSym(
 // This function generates a symmetric cipher key. The derivation process is
 // determined by the type of the provided 'rand'
 // Return type: TPM_RC
-//      TPM_RC_NO_RESULT    cannot get a random value      
+//      TPM_RC_NO_RESULT    cannot get a random value
 //      TPM_RC_KEY_SIZE     key size in the public area does not match the size
 //                          in the sensitive creation area
 //      TPM_RC_KEY          provided key value is not allowed
@@ -329,7 +329,7 @@ CryptGenerateKeySymmetric(
         if(result == TPM_RC_SUCCESS)
             MemoryCopy2B(&sensitive->sensitive.sym.b, &sensitiveCreate->data.b,
                          sizeof(sensitive->sensitive.sym.t.buffer));
-    } 
+    }
 #if ALG_TDES
     else if(publicArea->parameters.symDetail.sym.algorithm == TPM_ALG_TDES)
     {
@@ -338,8 +338,8 @@ CryptGenerateKeySymmetric(
 #endif
     else
     {
-        sensitive->sensitive.sym.t.size = 
-            DRBG_Generate(rand, sensitive->sensitive.sym.t.buffer, 
+        sensitive->sensitive.sym.t.size =
+            DRBG_Generate(rand, sensitive->sensitive.sym.t.buffer,
                           BITS_TO_BYTES(keyBits));
         if(g_inFailureMode)
             result = TPM_RC_FAILURE;
@@ -590,7 +590,7 @@ CryptSecretEncrypt(
                 if(CryptEccPointMultiply(&eccSecret,
                              encryptKey->publicArea.parameters.eccDetail.curveID,
                              &encryptKey->publicArea.unique.ecc, &eccPrivate,
-                             NULL, NULL) 
+                             NULL, NULL)
                    != TPM_RC_SUCCESS)
                     result = TPM_RC_KEY;
                 else
@@ -969,7 +969,7 @@ CryptComputeSymmetricUnique(
         HMAC_STATE      hmacState;
         unique->b.size = CryptHmacStart2B(&hmacState, publicArea->nameAlg,
                                           &sensitive->seedValue.b);
-        CryptDigestUpdate2B(&hmacState.hashState, 
+        CryptDigestUpdate2B(&hmacState.hashState,
                             &sensitive->sensitive.any.b);
         CryptHmacEnd2B(&hmacState, &unique->b);
     }
@@ -1007,7 +1007,7 @@ CryptComputeSymmetricUnique(
 // the Endorsement hierarchy, it will also populate 'proof' with ehProof.
 //
 // For derived keys, 'seed' will be the secret value from the parent, 'label' and
-// 'context' will be set according to the parameters of TPM2_CreateLoaded() and 
+// 'context' will be set according to the parameters of TPM2_CreateLoaded() and
 // 'hashAlg' will be set which causes the RAND_STATE to be a KDF generator.
 //
 //  Return Type: TPM_RC
@@ -1041,7 +1041,7 @@ CryptCreateObject(
 
     // If the TPM is the source of the data, set the size of the provided data to
     // zero so that there's no confusion about what to do.
-    if(IS_ATTRIBUTE(publicArea->objectAttributes, 
+    if(IS_ATTRIBUTE(publicArea->objectAttributes,
                     TPMA_OBJECT, sensitiveDataOrigin))
         sensitiveCreate->data.t.size = 0;
 
@@ -1089,7 +1089,7 @@ CryptCreateObject(
     }
     // Generate a seedValue that is the size of the digest produced by nameAlg
     sensitive->seedValue.t.size =
-        DRBG_Generate(rand, sensitive->seedValue.t.buffer, 
+        DRBG_Generate(rand, sensitive->seedValue.t.buffer,
                       CryptHashGetDigestSize(publicArea->nameAlg));
     if(g_inFailureMode)
         return TPM_RC_FAILURE;
@@ -1492,7 +1492,7 @@ CryptValidateSignature(
 {
     // NOTE: HandleToObject will either return a pointer to a loaded object or
     // will assert. It will never return a non-valid value. This makes it save
-    // to initialize 'publicArea' with the return value from HandleToObject() 
+    // to initialize 'publicArea' with the return value from HandleToObject()
     // without checking it first.
     OBJECT              *signObject = HandleToObject(keyHandle);
     TPMT_PUBLIC         *publicArea = &signObject->publicArea;
@@ -1551,15 +1551,15 @@ CryptGetTestResult(
 //*** CryptValidateKeys()
 // This function is used to verify that the key material of and object is valid.
 // For a 'publicOnly' object, the key is verified for size and, if it is an ECC
-// key, it is verified to be on the specified curve. For a key with a sensitive 
+// key, it is verified to be on the specified curve. For a key with a sensitive
 // area, the binding between the public and private parts of the key are verified.
 // If the nameAlg of the key is TPM_ALG_NULL, then the size of the sensitive area
 // is verified but the public portion is not verified, unless the key is an RSA key.
-// For an RSA key, the reason for loading the sensitive area is to use it. The 
+// For an RSA key, the reason for loading the sensitive area is to use it. The
 // only way to use a private RSA key is to compute the private exponent. To compute
 // the private exponent, the public modulus is used.
 //  Return Type: TPM_RC
-//      TPM_RC_BINDING      the public and private parts are not cryptographically 
+//      TPM_RC_BINDING      the public and private parts are not cryptographically
 //                          bound
 //      TPM_RC_HASH         cannot have a publicOnly key with nameAlg of TPM_ALG_NULL
 //      TPM_RC_KEY          the public unique is not valid
@@ -1580,7 +1580,7 @@ CryptValidateKeys(
     TPMU_PUBLIC_ID      *unique = &publicArea->unique;
 
     if(sensitive != NULL)
-    {   
+    {
         // Make sure that the types of the public and sensitive are compatible
         if(publicArea->type != sensitive->sensitiveType)
             return TPM_RCS_TYPE + blameSensitive;
@@ -1601,7 +1601,7 @@ CryptValidateKeys(
             // needs to have the correct size. Otherwise, it can't be used for
             // any public key operation nor can it be used to compute the private
             // exponent.
-            // NOTE: This implementation only supports key sizes that are multiples 
+            // NOTE: This implementation only supports key sizes that are multiples
             // of 1024 bits which means that the MSb of the 0th byte will always be
             // SET in any prime and in the public modulus.
             if((unique->rsa.t.size != keySizeInBytes)
@@ -1613,7 +1613,7 @@ CryptValidateKeys(
             if(sensitive != NULL)
             {
                 // If there is a sensitive area, it has to be the correct size
-                // including having the correct high order bit SET. 
+                // including having the correct high order bit SET.
                 if(((sensitive->sensitive.rsa.t.size * 2) != keySizeInBytes)
                    || (sensitive->sensitive.rsa.t.buffer[0] < 0x80))
                     return TPM_RCS_KEY_SIZE + blameSensitive;
@@ -1640,7 +1640,7 @@ CryptValidateKeys(
             }
             else
             {
-                // If the nameAlg is TPM_ALG_NULL, then only verify that the 
+                // If the nameAlg is TPM_ALG_NULL, then only verify that the
                 // private part of the key is OK.
                 if(!CryptEccIsValidPrivateKey(&sensitive->sensitive.ecc,
                                                   curveId))
@@ -1658,9 +1658,9 @@ CryptValidateKeys(
                     else
                     {
                     // Make sure that the private key generated the public key.
-                    // The input values and the values produced by the point 
-                    // multiply may not be the same size so adjust the computed 
-                    // value to match the size of the input value by adding or 
+                    // The input values and the values produced by the point
+                    // multiply may not be the same size so adjust the computed
+                    // value to match the size of the input value by adding or
                     // removing zeros.
                         AdjustNumberB(&toCompare.x.b, unique->ecc.x.t.size);
                         AdjustNumberB(&toCompare.y.b, unique->ecc.y.t.size);
@@ -1678,7 +1678,7 @@ CryptValidateKeys(
             // If public area has a nameAlg, then validate the public area size
             // and if there is also a sensitive area, validate the binding
 
-            // For consistency, if the object is public-only just make sure that 
+            // For consistency, if the object is public-only just make sure that
             // the unique field is consistent with the name algorithm
             if(sensitive == NULL)
             {
@@ -1690,7 +1690,7 @@ CryptValidateKeys(
                 // Make sure that the key size in the sensitive area is consistent.
                 if(publicArea->type == TPM_ALG_SYMCIPHER)
                 {
-                    result = CryptSymKeyValidate(&params->symDetail.sym, 
+                    result = CryptSymKeyValidate(&params->symDetail.sym,
                                                 &sensitive->sensitive.sym);
                     if(result != TPM_RC_SUCCESS)
                         return result + blameSensitive;
@@ -1699,8 +1699,8 @@ CryptValidateKeys(
                 {
                     // For a keyed hash object, the key has to be less than the
                     // smaller of the block size of the hash used in the scheme or
-                    // 128 bytes. The worst case value is limited by the 
-                    // unmarshaling code so the only thing left to be checked is 
+                    // 128 bytes. The worst case value is limited by the
+                    // unmarshaling code so the only thing left to be checked is
                     // that it does not exceed the block size of the hash.
                     // by the hash algorithm of the scheme.
                     TPMT_KEYEDHASH_SCHEME       *scheme;
@@ -1791,7 +1791,7 @@ CryptSelectMac(
             return TPM_RCS_TYPE;
     }
     // If the input value is not TPM_ALG_NULL ...
-    if(*inMac != TPM_ALG_NULL) 
+    if(*inMac != TPM_ALG_NULL)
     {
         // ... then either the scheme in the key must be TPM_ALG_NULL or the input
         // value must match
@@ -1859,7 +1859,7 @@ CryptSmacIsValidAlg(
 }
 
 //*** CryptSymModeIsValid()
-// Function checks to see if an algorithm ID is a valid, symmetric block cipher 
+// Function checks to see if an algorithm ID is a valid, symmetric block cipher
 // mode for the TPM. If 'flag' is SET, them TPM_ALG_NULL is a valid mode.
 // not include the modes used for SMAC
 BOOL
@@ -1894,6 +1894,3 @@ CryptSymModeIsValid(
     }
     return FALSE;
 }
-
-
-

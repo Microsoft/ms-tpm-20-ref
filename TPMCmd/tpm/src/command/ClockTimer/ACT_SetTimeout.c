@@ -43,7 +43,7 @@
 //  Return Type: TPM_RC
 //      TPM_RC_RETRY            returned when an update for the selected ACT is
 //                              already pending
-//      TPM_RC_VALUE            attempt to disable signaling from an ACT that has 
+//      TPM_RC_VALUE            attempt to disable signaling from an ACT that has
 //                              not expired
 TPM_RC
 TPM2_ACT_SetTimeout(

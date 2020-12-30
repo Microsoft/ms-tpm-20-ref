@@ -72,7 +72,7 @@ TPM2_MAC_Start(
     // If there is another error type, indicate that the scheme and key are not
     // compatible
     if(result != TPM_RC_SUCCESS)
-        return RcSafeAddToResult(result, RC_MAC_Start_inScheme);    
+        return RcSafeAddToResult(result, RC_MAC_Start_inScheme);
     // Make sure that the key is not restricted
     if(IS_ATTRIBUTE(publicArea->objectAttributes, TPMA_OBJECT, restricted))
         return TPM_RCS_ATTRIBUTES + RC_MAC_Start_handle;

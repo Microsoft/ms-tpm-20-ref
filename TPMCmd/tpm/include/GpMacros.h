@@ -63,7 +63,7 @@
 #endif // SELF_TEST
 
 //** For Failures
-#if defined _POSIX_ 
+#if defined _POSIX_
 #   define FUNCTION_NAME        0
 #else
 #   define FUNCTION_NAME        __FUNCTION__
@@ -90,8 +90,8 @@
 #endif
 
 // This macro tests that a condition is TRUE and puts the TPM into failure mode
-// if it is not. If longjmp is being used, then the FAIL(FATAL_ERROR_) macro makes 
-// a call from which there is no return. Otherwise, it returns and the function 
+// if it is not. If longjmp is being used, then the FAIL(FATAL_ERROR_) macro makes
+// a call from which there is no return. Otherwise, it returns and the function
 // will exit with the appropriate return code.
 #define REQUIRE(condition, errorCode, returnCode)                                   \
     {                                                                               \
@@ -124,7 +124,7 @@
 // In some cases, the relationship between two values may be dependent
 // on things that change based on various selections like the chosen cryptographic
 // libraries. It is possible that these selections will result in incompatible
-// settings. These are often detectable by the compiler but it is not always 
+// settings. These are often detectable by the compiler but it is not always
 // possible to do the check in the preprocessor code. For example, when the
 // check requires use of "sizeof" then the preprocessor can't do the comparison.
 // For these cases, we include a special macro that, depending on the compiler
@@ -137,7 +137,7 @@
 #   define cAssert(value)
 #endif
 
-// This is used commonly in the "Crypt" code as a way to keep listings from 
+// This is used commonly in the "Crypt" code as a way to keep listings from
 // getting too long. This is not to save paper but to allow one to see more
 // useful stuff on the screen at any given time.
 #define     ERROR_RETURN(returnCode)                                                \
@@ -206,7 +206,7 @@
 #   elif defined ALG_SM3_256 && ALG_SM3_256 == YES
 #       define CONTEXT_HASH_ALGORITHM    SM3_256
 #   elif defined ALG_SHA1 && ALG_SHA1 == YES
-#       define CONTEXT_HASH_ALGORITHM  SHA1  
+#       define CONTEXT_HASH_ALGORITHM  SHA1
 #   endif
 #   define CONTEXT_INTEGRITY_HASH_ALG  CONCAT(TPM_ALG_, CONTEXT_HASH_ALGORITHM)
 #endif
@@ -252,7 +252,7 @@
 // As required by P1.14.4
 #define COMPLIANT_PROOF_SIZE                                                        \
             (MAX(CONTEXT_INTEGRITY_HASH_SIZE, (2 * MAX_SYM_KEY_BYTES)))
-      
+
 // As required by P1.14.3.1
 #define COMPLIANT_PRIMARY_SEED_SIZE                                                 \
     BITS_TO_BYTES(MAX_SECURITY_STRENGTH_BITS * 2)
@@ -269,7 +269,7 @@
 #   define PRIMARY_SEED_SIZE    COMPLIANT_PRIMARY_SEED_SIZE
 #endif  // USE_SPEC_COMPLIANT_PROOFS
 
-#if !SKIP_PROOF_ERRORS 
+#if !SKIP_PROOF_ERRORS
 #   if PROOF_SIZE < COMPLIANT_PROOF_SIZE
 #       error "PROOF_SIZE is not compliant with TPM specification"
 #   endif
@@ -279,7 +279,7 @@
 #endif // !SKIP_PROOF_ERRORS
 
 // If CONTEXT_ENCRYPT_ALG is defined, then the vendor is using the old style table
-#if defined CONTEXT_ENCRYPT_ALG 
+#if defined CONTEXT_ENCRYPT_ALG
 #   undef CONTEXT_ENCRYPT_ALGORITHM
 #   if   CONTEXT_ENCRYPT_ALG == ALG_AES_VALUE
 #       define CONTEXT_ENCRYPT_ALGORITHM    AES
@@ -288,14 +288,14 @@
 #   elif CONTEXT_ENCRYPT_ALG == ALG_CAMELLIA_VALUE
 #       define CONTEXT_ENCRYPT_ALGORITHM    CAMELLIA
 #   elif CONTEXT_ENCRYPT_ALG == ALG_TDES_VALUE
-#   error Are you kidding? 
+#   error Are you kidding?
 #   else
 #       error Unknown value for CONTEXT_ENCRYPT_ALG
 #   endif // CONTEXT_ENCRYPT_ALG == ALG_AES_VALUE
 #else
 #   define CONTEXT_ENCRYPT_ALG                                                      \
             CONCAT3(ALG_, CONTEXT_ENCRYPT_ALGORITHM, _VALUE)
-#endif  // CONTEXT_ENCRYPT_ALG 
+#endif  // CONTEXT_ENCRYPT_ALG
 #define CONTEXT_ENCRYPT_KEY_BITS                                                    \
                 CONCAT(CONTEXT_ENCRYPT_ALGORITHM, _MAX_KEY_SIZE_BITS)
 #define CONTEXT_ENCRYPT_KEY_BYTES       ((CONTEXT_ENCRYPT_KEY_BITS+7)/8)
@@ -308,9 +308,9 @@
 
 // This bit is used to indicate that an authorization ticket expires on TPM Reset
 // and TPM Restart. It is added to the timeout value returned by TPM2_PoliySigned()
-// and TPM2_PolicySecret() and used by TPM2_PolicyTicket(). The timeout value is 
+// and TPM2_PolicySecret() and used by TPM2_PolicyTicket(). The timeout value is
 // relative to Time (g_time). Time is reset whenever the TPM loses power and cannot
-// be moved forward by the user (as can Clock). 'g_time' is a 64-bit value expressing 
+// be moved forward by the user (as can Clock). 'g_time' is a 64-bit value expressing
 // time in ms. Stealing the MSb for a flag means that the TPM needs to be reset
 // at least once every 292,471,208 years rather than once every 584,942,417 years.
 #define EXPIRATION_BIT ((UINT64)1 << 63)
@@ -320,7 +320,7 @@
 #   error "Settings not consistent"
 #endif
 
-// These macros are used to handle the variation in handling of bit fields. If 
+// These macros are used to handle the variation in handling of bit fields. If
 #if USE_BIT_FIELD_STRUCTURES // The default, old version, with bit fields
 #   define IS_ATTRIBUTE(a, type, b)         ((a.b) != 0)
 #   define SET_ATTRIBUTE(a, type, b)        (a.b = SET)
@@ -336,7 +336,7 @@
 #   define TPMA_ZERO_INITIALIZER()          (0)
 #endif
 
-#define VERIFY(_X) if(!(_X)) goto Error 
+#define VERIFY(_X) if(!(_X)) goto Error
 
 // These macros determine if the values in this file are referenced or instanced.
 // Global.c defines GLOBAL_C so all the values in this file will be instanced in

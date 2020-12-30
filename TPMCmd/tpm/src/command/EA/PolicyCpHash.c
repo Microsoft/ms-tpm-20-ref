@@ -66,13 +66,13 @@ TPM2_PolicyCpHash(
     if(in->cpHashA.t.size != CryptHashGetDigestSize(session->authHashAlg))
         return TPM_RCS_SIZE + RC_PolicyCpHash_cpHashA;
 
-    // error if the cpHash in session context is not empty and is not the same 
+    // error if the cpHash in session context is not empty and is not the same
     // as the input or is not a cpHash
     if((session->u1.cpHash.t.size != 0)
        && (!session->attributes.isCpHashDefined
            || !MemoryEqual2B(&in->cpHashA.b, &session->u1.cpHash.b)))
         return TPM_RC_CPHASH;
-    
+
 
 // Internal Data Update
 

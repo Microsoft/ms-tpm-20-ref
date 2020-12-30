@@ -70,7 +70,7 @@ typedef void(*TpmCryptSetSymKeyCall_t)(
     const BYTE  *in
     );
 
-// The Crypt functions that call the block encryption function use the parameters 
+// The Crypt functions that call the block encryption function use the parameters
 // in the order:
 //  1) keySchedule
 //  2) in buffer
@@ -96,8 +96,8 @@ typedef void(*TpmCryptSetSymKeyCall_t)(
 
 // Macros to alias encryption calls to specific algorithms. This should be used
 // sparingly. Currently, only used by CryptRand.c
-// 
-// When using these calls, to call the AES block encryption code, the caller 
+//
+// When using these calls, to call the AES block encryption code, the caller
 // should use:
 //      TpmCryptEncryptAES(SWIZZLE(keySchedule, in, out));
 #define TpmCryptEncryptAES          wc_AesEncryptDirect
@@ -105,7 +105,7 @@ typedef void(*TpmCryptSetSymKeyCall_t)(
 #define tpmKeyScheduleAES           Aes
 
 #define TpmCryptEncryptTDES         TDES_encrypt
-#define TpmCryptDecryptTDES         TDES_decrypt 
+#define TpmCryptDecryptTDES         TDES_decrypt
 #define tpmKeyScheduleTDES          Des3
 
 typedef union tpmCryptKeySchedule_t tpmCryptKeySchedule_t;

@@ -78,7 +78,7 @@
 #define SWAP_CRYPT_WORD(x)  REVERSE_ENDIAN_64(x)
     typedef uint64_t    crypt_uword_t;
     typedef int64_t     crypt_word_t;
-#   define TO_CRYPT_WORD_64             BIG_ENDIAN_BYTES_TO_UINT64 
+#   define TO_CRYPT_WORD_64             BIG_ENDIAN_BYTES_TO_UINT64
 #   define TO_CRYPT_WORD_32(a, b, c, d) TO_CRYPT_WORD_64(0, 0, 0, 0, a, b, c, d)
 #elif RADIX_BITS == 32
 #   define SWAP_CRYPT_WORD(x)  REVERSE_ENDIAN_32((x))
@@ -291,7 +291,7 @@ typedef struct
 #define CurveGetGy(C)       ((C)->base.y)
 
 
-// Convert bytes in initializers 
+// Convert bytes in initializers
 // This is used for CryptEccData.c.
 #define     BIG_ENDIAN_BYTES_TO_UINT32(a, b, c, d)                                  \
             (    ((UINT32)(a) << 24)                                                \
@@ -322,14 +322,14 @@ typedef struct
 #endif
 
 // These macros are used for data initialization of big number ECC constants
-// These two macros combine a macro for data definition with a macro for 
-// structure initilization. The 'a' parameter is a macro that gives numbers to 
+// These two macros combine a macro for data definition with a macro for
+// structure initilization. The 'a' parameter is a macro that gives numbers to
 // each of the bytes of the initializer and defines where each of the numberd
 // bytes will show up in the final structure. The 'b' value is a structure that
-// contains the requisite number of bytes in big endian order. S, the MJOIN 
+// contains the requisite number of bytes in big endian order. S, the MJOIN
 // and JOIND macros will combine a macro defining a data layout with a macro defining
 // the data to be places. Generally, these macros will only need expansion when
-// CryptEccData.c gets compiled. 
+// CryptEccData.c gets compiled.
 #define JOINED(a,b) a b
 #define MJOIN(a,b) a b
 
@@ -357,7 +357,7 @@ typedef struct
 
 #endif
 
-// Add implementation dependent definitions for other ECC Values and for linkages. 
+// Add implementation dependent definitions for other ECC Values and for linkages.
 #include LIB_INCLUDE(MATH_LIB, Math)
 
 

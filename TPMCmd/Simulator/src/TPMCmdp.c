@@ -133,7 +133,9 @@ _rpc__ForceFailureMode(
     void
     )
 {
+#if SIMULATION
     SetForceFailureMode();
+#endif
     return;
 }
 
